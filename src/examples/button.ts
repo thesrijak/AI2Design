@@ -1,411 +1,411 @@
-import type { ComponentSetJSON } from '../schema'
+import type { ComponentSetJSON } from "../schema";
 
 export const buttonExample: ComponentSetJSON = {
-  name: 'Button',
-  type: 'COMPONENT_SET',
+  name: "Button",
+  type: "COMPONENT_SET",
   variantProperties: {
-    State: ['Default', 'Hover', 'Pressed', 'Disabled'],
-    Size: ['Sm', 'Md', 'Lg']
+    State: ["Default", "Hover", "Pressed", "Disabled"],
+    Size: ["Sm", "Md", "Lg"],
   },
   variants: [
     {
       properties: {
-        State: 'Default',
-        Size: 'Sm'
+        State: "Default",
+        Size: "Sm",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 8,
           right: 12,
           bottom: 8,
-          left: 12
+          left: 12,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#7C5AF7'],
+        fills: ["#7C5AF7"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 12,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Hover',
-        Size: 'Sm'
+        State: "Hover",
+        Size: "Sm",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 8,
           right: 12,
           bottom: 8,
-          left: 12
+          left: 12,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#6B4BE6'],
+        fills: ["#6B4BE6"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 12,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Pressed',
-        Size: 'Sm'
+        State: "Pressed",
+        Size: "Sm",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 8,
           right: 12,
           bottom: 8,
-          left: 12
+          left: 12,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#5A3FCB'],
+        fills: ["#5A3FCB"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 12,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Disabled',
-        Size: 'Sm'
+        State: "Disabled",
+        Size: "Sm",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         opacity: 0.6,
         padding: {
           top: 8,
           right: 12,
           bottom: 8,
-          left: 12
+          left: 12,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#9CA3AF'],
+        fills: ["#9CA3AF"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 12,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Default',
-        Size: 'Md'
+        State: "Default",
+        Size: "Md",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 12,
           right: 16,
           bottom: 12,
-          left: 16
+          left: 16,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#7C5AF7'],
+        fills: ["#7C5AF7"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 14,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Hover',
-        Size: 'Md'
+        State: "Hover",
+        Size: "Md",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 12,
           right: 16,
           bottom: 12,
-          left: 16
+          left: 16,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#6B4BE6'],
+        fills: ["#6B4BE6"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 14,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Pressed',
-        Size: 'Md'
+        State: "Pressed",
+        Size: "Md",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 12,
           right: 16,
           bottom: 12,
-          left: 16
+          left: 16,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#5A3FCB'],
+        fills: ["#5A3FCB"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 14,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Disabled',
-        Size: 'Md'
+        State: "Disabled",
+        Size: "Md",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         opacity: 0.6,
         padding: {
           top: 12,
           right: 16,
           bottom: 12,
-          left: 16
+          left: 16,
         },
         itemSpacing: 8,
         cornerRadius: 10,
-        fills: ['#9CA3AF'],
+        fills: ["#9CA3AF"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 14,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Default',
-        Size: 'Lg'
+        State: "Default",
+        Size: "Lg",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 14,
           right: 20,
           bottom: 14,
-          left: 20
+          left: 20,
         },
         itemSpacing: 8,
         cornerRadius: 12,
-        fills: ['#7C5AF7'],
+        fills: ["#7C5AF7"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 16,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Hover',
-        Size: 'Lg'
+        State: "Hover",
+        Size: "Lg",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 14,
           right: 20,
           bottom: 14,
-          left: 20
+          left: 20,
         },
         itemSpacing: 8,
         cornerRadius: 12,
-        fills: ['#6B4BE6'],
+        fills: ["#6B4BE6"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 16,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Pressed',
-        Size: 'Lg'
+        State: "Pressed",
+        Size: "Lg",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         padding: {
           top: 14,
           right: 20,
           bottom: 14,
-          left: 20
+          left: 20,
         },
         itemSpacing: 8,
         cornerRadius: 12,
-        fills: ['#5A3FCB'],
+        fills: ["#5A3FCB"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 16,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
     },
     {
       properties: {
-        State: 'Disabled',
-        Size: 'Lg'
+        State: "Disabled",
+        Size: "Lg",
       },
       node: {
-        name: 'Button',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'CENTER',
-        counterAxisAlignItems: 'CENTER',
-        layoutSizingHorizontal: 'HUG',
-        layoutSizingVertical: 'HUG',
+        name: "Button",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "CENTER",
+        counterAxisAlignItems: "CENTER",
+        layoutSizingHorizontal: "HUG",
+        layoutSizingVertical: "HUG",
         opacity: 0.6,
         padding: {
           top: 14,
           right: 20,
           bottom: 14,
-          left: 20
+          left: 20,
         },
         itemSpacing: 8,
         cornerRadius: 12,
-        fills: ['#9CA3AF'],
+        fills: ["#9CA3AF"],
         children: [
           {
-            name: 'Label',
-            type: 'TEXT',
-            characters: 'Continue',
+            name: "Label",
+            type: "TEXT",
+            characters: "Continue",
             fontSize: 16,
-            fills: ['#FFFFFF']
-          }
-        ]
-      }
-    }
-  ]
-}
+            fills: ["#FFFFFF"],
+          },
+        ],
+      },
+    },
+  ],
+};

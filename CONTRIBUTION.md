@@ -36,6 +36,24 @@ $ npm run watch
 - Use clear, descriptive commit messages.
 - Use a clear PR title and a complete description of the change (what, why, and how to test).
 
+## Code quality
+
+Run these checks before opening a PR:
+
+- Format: `npm run format:check` (or `npm run format` to auto-fix).
+- Lint: `npm run lint`.
+- Typecheck: `npm run typecheck`.
+- Build: `npm run build`.
+
+Pre-commit hooks run these checks automatically in this order: format check, format if needed, lint, typecheck, and build. `npm install` sets up the hooks via the `prepare` script.
+If any step fails, the commit will be blocked until the issues are fixed.
+
+To install hooks manually (if they are missing):
+
+```
+$ npm run prepare
+```
+
 ## Reporting issues
 
 Include:

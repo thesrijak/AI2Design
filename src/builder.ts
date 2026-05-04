@@ -3,54 +3,86 @@
 import {
   ComponentSetJSON,
   FrameNodeJSON,
+  GradientStopJSON,
   NodeJSON,
   PaintInputJSON,
+  RectangleNodeJSON,
+  RGBColorJSON,
+  BlurEffectJSON,
+  StrokePositionJSON,
   TextNodeJSON,
   EffectJSON,
-  hexToRGB
-} from './schema'
+  hexToRGB,
+} from "./schema";
 
-function clamp(value: any, min = 0, max = 1) {
-  const number = Number(value)
+type CommonStyleData = {
+  name?: string;
+  width?: number | "HUG" | "FILL";
+  height?: number | "HUG" | "FILL";
+  opacity?: number;
+  blendMode?: BlendMode;
+  fills?: PaintInputJSON[];
+  strokes?: PaintInputJSON[];
+  strokeWeight?: number;
+  strokePosition?: StrokePositionJSON;
+  strokeDashes?: number[];
+  effects?: EffectJSON[];
+  layoutSizingHorizontal?: "FIXED" | "HUG" | "FILL";
+  layoutSizingVertical?: "FIXED" | "HUG" | "FILL";
+};
+type CornerData = FrameNodeJSON | RectangleNodeJSON;
+
+function toCommonStyleData(node: NodeJSON): CommonStyleData {
+  const common = { ...node } as NodeJSON & {
+    type?: never;
+    children?: never;
+  };
+  delete (common as { type?: unknown }).type;
+  delete (common as { children?: unknown }).children;
+  return common as CommonStyleData;
+}
+
+function clamp(value: unknown, min = 0, max = 1) {
+  const number = Number(value);
   if (Number.isNaN(number)) {
-    return min
+    return min;
   }
 
-  return Math.min(max, Math.max(min, number))
+  return Math.min(max, Math.max(min, number));
 }
 
 function ensurePageParent(parent: BaseNode) {
-  if ('appendChild' in parent) {
-    return parent as ChildrenMixin
+  if ("appendChild" in parent) {
+    return parent as ChildrenMixin;
   }
 
-  throw new Error('Parent node cannot accept children')
+  throw new Error("Parent node cannot accept children");
 }
 
 function appendToParent(parent: BaseNode, child: SceneNode) {
-  ensurePageParent(parent).appendChild(child)
+  ensurePageParent(parent).appendChild(child);
 }
 
-function rgbToFigmaColor(color: any) {
+function rgbToFigmaColor(color: RGBColorJSON) {
   return {
     r: clamp(color.r),
     g: clamp(color.g),
-    b: clamp(color.b)
-  }
+    b: clamp(color.b),
+  };
 }
 
 function solidPaintFromHex(hex: string): SolidPaint {
-  const color = hexToRGB(hex)
+  const color = hexToRGB(hex);
   return {
-    type: 'SOLID',
+    type: "SOLID",
     color: rgbToFigmaColor(color),
     opacity: color.a ?? 1,
     visible: true,
-    blendMode: 'NORMAL'
-  }
+    blendMode: "NORMAL",
+  };
 }
 
-function buildGradientStops(stops: any[]) {
+function buildGradientStops(stops: GradientStopJSON[]) {
   return stops.map(function (stop) {
     return {
       position: stop.position,
@@ -58,487 +90,534 @@ function buildGradientStops(stops: any[]) {
         r: clamp(stop.r),
         g: clamp(stop.g),
         b: clamp(stop.b),
-        a: clamp(stop.a ?? 1)
-      }
-    }
-  })
+        a: clamp(stop.a ?? 1),
+      },
+    };
+  });
 }
 
 function buildLinearGradientTransform(angle: number): Transform {
-  const radians = (angle * Math.PI) / 180
-  const cos = Math.cos(radians)
-  const sin = Math.sin(radians)
+  const radians = (angle * Math.PI) / 180;
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
 
   return [
     [cos, sin, 0.5 - cos / 2 - sin / 2],
-    [-sin, cos, 0.5 + sin / 2 - cos / 2]
-  ]
+    [-sin, cos, 0.5 + sin / 2 - cos / 2],
+  ];
 }
 
 function normalizePaint(paint: PaintInputJSON): Paint {
-  if (typeof paint === 'string') {
-    return solidPaintFromHex(paint)
+  if (typeof paint === "string") {
+    return solidPaintFromHex(paint);
   }
 
-  if (paint.type === 'SOLID') {
+  if (paint.type === "SOLID") {
     return {
-      type: 'SOLID',
+      type: "SOLID",
       color: rgbToFigmaColor(paint),
       opacity: clamp(paint.a ?? 1),
       visible: true,
-      blendMode: 'NORMAL'
-    }
+      blendMode: "NORMAL",
+    };
   }
 
-  if (paint.type === 'LINEAR_GRADIENT') {
+  if (paint.type === "LINEAR_GRADIENT") {
     return {
-      type: 'GRADIENT_LINEAR',
+      type: "GRADIENT_LINEAR",
       gradientStops: buildGradientStops(paint.stops),
       gradientTransform: buildLinearGradientTransform(paint.angle),
       visible: true,
       opacity: 1,
-      blendMode: 'NORMAL'
-    }
+      blendMode: "NORMAL",
+    };
   }
 
   return {
-    type: 'GRADIENT_RADIAL',
+    type: "GRADIENT_RADIAL",
     gradientStops: buildGradientStops(paint.stops),
     gradientTransform: [
       [0.5, 0, 0.25],
-      [0, 0.5, 0.25]
+      [0, 0.5, 0.25],
     ],
     visible: true,
     opacity: 1,
-    blendMode: 'NORMAL'
-  }
+    blendMode: "NORMAL",
+  };
 }
 
-export function applyFills(node: any, fills?: PaintInputJSON[]) {
-  if (!('fills' in node) || fills === undefined) {
-    return
-  }
-
-  node.fills = fills.map(normalizePaint)
+function hasFills(node: SceneNode): node is SceneNode & GeometryMixin {
+  return "fills" in node;
 }
 
-export function applyStrokes(node: any, strokes?: PaintInputJSON[]) {
-  if (!('strokes' in node) || strokes === undefined) {
-    return
-  }
-
-  node.strokes = strokes.map(normalizePaint)
+function hasStrokes(node: SceneNode): node is SceneNode & GeometryMixin {
+  return "strokes" in node;
 }
 
-export function applyEffects(node: any, effects?: EffectJSON[]) {
-  if (!('effects' in node) || effects === undefined) {
-    return
+type EffectsNode = SceneNode & { effects: ReadonlyArray<Effect> };
+
+function hasEffects(node: SceneNode): node is EffectsNode {
+  return "effects" in node;
+}
+
+export function applyFills(node: SceneNode, fills?: PaintInputJSON[]) {
+  if (!hasFills(node) || fills === undefined) {
+    return;
   }
 
-  node.effects = effects.map(function (effect) {
-    if (effect.type === 'DROP_SHADOW' || effect.type === 'INNER_SHADOW') {
+  node.fills = fills.map(normalizePaint);
+}
+
+export function applyStrokes(node: SceneNode, strokes?: PaintInputJSON[]) {
+  if (!hasStrokes(node) || strokes === undefined) {
+    return;
+  }
+
+  node.strokes = strokes.map(normalizePaint);
+}
+
+export function applyEffects(node: SceneNode, effects?: EffectJSON[]) {
+  if (!hasEffects(node) || effects === undefined) {
+    return;
+  }
+
+  node.effects = effects.map(function (effect): Effect {
+    if (effect.type === "DROP_SHADOW" || effect.type === "INNER_SHADOW") {
       return {
         type: effect.type,
         color: {
           r: clamp(effect.color.r),
           g: clamp(effect.color.g),
           b: clamp(effect.color.b),
-          a: clamp(effect.color.a ?? 1)
+          a: clamp(effect.color.a ?? 1),
         },
         offset: {
           x: effect.offset.x,
-          y: effect.offset.y
+          y: effect.offset.y,
         },
         radius: effect.blur,
         spread: effect.spread ?? 0,
         visible: effect.visible !== false,
-        blendMode: 'NORMAL'
-      }
+        blendMode: "NORMAL",
+      };
     }
 
-    const blurEffect = effect as any
-    return {
-      type: effect.type,
-      radius: blurEffect.radius,
-      visible: effect.visible !== false
+    if (effect.type === "LAYER_BLUR" || effect.type === "BACKGROUND_BLUR") {
+      const blurEffect = effect as BlurEffectJSON;
+      return {
+        type: effect.type,
+        radius: blurEffect.radius,
+        visible: effect.visible !== false,
+      };
     }
-  })
+
+    return effect as unknown as Effect;
+  });
 }
 
-function applyCommonStyles(node: any, data: any) {
+function applyCommonStyles(node: SceneNode, data: CommonStyleData) {
   if (data.name) {
-    node.name = data.name
+    node.name = data.name;
   }
 
-  if ('resize' in node) {
-    const widthValue = typeof data.width === 'number' ? data.width : undefined
-    const heightValue = typeof data.height === 'number' ? data.height : undefined
-    const layoutSizingHorizontal = data.layoutSizingHorizontal
-    const layoutSizingVertical = data.layoutSizingVertical
+  if ("resize" in node) {
+    const widthValue = typeof data.width === "number" ? data.width : undefined;
+    const heightValue =
+      typeof data.height === "number" ? data.height : undefined;
+    const layoutSizingHorizontal = data.layoutSizingHorizontal;
+    const layoutSizingVertical = data.layoutSizingVertical;
     const canResizeWidth =
-      widthValue !== undefined && layoutSizingHorizontal !== 'HUG' && layoutSizingHorizontal !== 'FILL'
+      widthValue !== undefined &&
+      layoutSizingHorizontal !== "HUG" &&
+      layoutSizingHorizontal !== "FILL";
     const canResizeHeight =
-      heightValue !== undefined && layoutSizingVertical !== 'HUG' && layoutSizingVertical !== 'FILL'
+      heightValue !== undefined &&
+      layoutSizingVertical !== "HUG" &&
+      layoutSizingVertical !== "FILL";
 
     if (canResizeWidth && canResizeHeight) {
-      node.resize(widthValue, heightValue)
+      node.resize(widthValue, heightValue);
     } else if (canResizeWidth) {
-      node.resize(widthValue, node.height)
+      node.resize(widthValue, node.height);
     } else if (canResizeHeight) {
-      node.resize(node.width, heightValue)
+      node.resize(node.width, heightValue);
     }
   }
 
-  if (data.opacity !== undefined && 'opacity' in node) {
-    node.opacity = data.opacity
+  if (data.opacity !== undefined && "opacity" in node) {
+    node.opacity = data.opacity;
   }
 
-  if (data.blendMode !== undefined && 'blendMode' in node) {
-    node.blendMode = data.blendMode
+  if (data.blendMode !== undefined && "blendMode" in node) {
+    node.blendMode = data.blendMode;
   }
 
-  if (data.strokeWeight !== undefined && 'strokeWeight' in node) {
-    node.strokeWeight = data.strokeWeight
+  if (data.strokeWeight !== undefined && "strokeWeight" in node) {
+    node.strokeWeight = data.strokeWeight;
   }
 
-  if (data.strokePosition !== undefined && 'strokeAlign' in node) {
-    node.strokeAlign = data.strokePosition
+  if (data.strokePosition !== undefined && "strokeAlign" in node) {
+    node.strokeAlign = data.strokePosition;
   }
 
-  if (data.strokeDashes !== undefined && 'dashPattern' in node) {
-    node.dashPattern = data.strokeDashes
+  if (data.strokeDashes !== undefined && "dashPattern" in node) {
+    node.dashPattern = data.strokeDashes;
   }
 
-  applyFills(node, data.fills)
-  applyStrokes(node, data.strokes)
-  applyEffects(node, data.effects)
+  applyFills(node, data.fills);
+  applyStrokes(node, data.strokes);
+  applyEffects(node, data.effects);
 }
 
-function applyCornerRadius(node: any, data: any) {
-  if (data.cornerRadius !== undefined && 'cornerRadius' in node) {
-    node.cornerRadius = data.cornerRadius
+function applyCornerRadius(node: SceneNode, data: CornerData) {
+  const mutableNode = node as unknown as {
+    cornerRadius?: number;
+    topLeftRadius?: number;
+    topRightRadius?: number;
+    bottomRightRadius?: number;
+    bottomLeftRadius?: number;
+  };
+
+  if (data.cornerRadius !== undefined && "cornerRadius" in node) {
+    mutableNode.cornerRadius = data.cornerRadius;
   }
 
-  if (data.cornerRadiusIndividual && 'topLeftRadius' in node) {
-    node.topLeftRadius = data.cornerRadiusIndividual.topLeft
-    node.topRightRadius = data.cornerRadiusIndividual.topRight
-    node.bottomRightRadius = data.cornerRadiusIndividual.bottomRight
-    node.bottomLeftRadius = data.cornerRadiusIndividual.bottomLeft
+  if (data.cornerRadiusIndividual && "topLeftRadius" in node) {
+    mutableNode.topLeftRadius = data.cornerRadiusIndividual.topLeft;
+    mutableNode.topRightRadius = data.cornerRadiusIndividual.topRight;
+    mutableNode.bottomRightRadius = data.cornerRadiusIndividual.bottomRight;
+    mutableNode.bottomLeftRadius = data.cornerRadiusIndividual.bottomLeft;
   }
 }
 
-function applyFrameSettings(node: FrameNode | ComponentNode, data: FrameNodeJSON) {
-  applyCommonStyles(node, data)
-  applyCornerRadius(node, data)
+function applyFrameSettings(
+  node: FrameNode | ComponentNode,
+  data: FrameNodeJSON,
+) {
+  applyCommonStyles(node, toCommonStyleData(data));
+  applyCornerRadius(node, data);
 
-  node.layoutMode = data.layoutMode && data.layoutMode !== 'NONE' ? data.layoutMode : 'NONE'
+  node.layoutMode =
+    data.layoutMode && data.layoutMode !== "NONE" ? data.layoutMode : "NONE";
 
   if (data.layoutAlign !== undefined) {
-    node.layoutAlign = data.layoutAlign
+    node.layoutAlign = data.layoutAlign;
   }
 
   if (data.primaryAxisAlignItems !== undefined) {
-    node.primaryAxisAlignItems = data.primaryAxisAlignItems
+    node.primaryAxisAlignItems = data.primaryAxisAlignItems;
   }
 
   if (data.counterAxisAlignItems !== undefined) {
-    node.counterAxisAlignItems = data.counterAxisAlignItems
+    node.counterAxisAlignItems = data.counterAxisAlignItems;
   }
 
-  if ('layoutSizingHorizontal' in node && 'layoutSizingVertical' in node) {
-    const widthKeyword = data.width === 'HUG' || data.width === 'FILL' ? data.width : undefined
-    const heightKeyword = data.height === 'HUG' || data.height === 'FILL' ? data.height : undefined
-    const canAutoLayout = node.layoutMode !== 'NONE'
+  if ("layoutSizingHorizontal" in node && "layoutSizingVertical" in node) {
+    const widthKeyword =
+      data.width === "HUG" || data.width === "FILL" ? data.width : undefined;
+    const heightKeyword =
+      data.height === "HUG" || data.height === "FILL" ? data.height : undefined;
+    const canAutoLayout = node.layoutMode !== "NONE";
     const nextLayoutSizingHorizontal =
-      data.layoutSizingHorizontal ?? (canAutoLayout ? widthKeyword ?? (data.width === undefined ? 'HUG' : undefined) : undefined)
+      data.layoutSizingHorizontal ??
+      (canAutoLayout
+        ? (widthKeyword ?? (data.width === undefined ? "HUG" : undefined))
+        : undefined);
     const nextLayoutSizingVertical =
-      data.layoutSizingVertical ?? (canAutoLayout ? heightKeyword ?? (data.height === undefined ? 'HUG' : undefined) : undefined)
+      data.layoutSizingVertical ??
+      (canAutoLayout
+        ? (heightKeyword ?? (data.height === undefined ? "HUG" : undefined))
+        : undefined);
 
     if (nextLayoutSizingHorizontal !== undefined) {
-      node.layoutSizingHorizontal = nextLayoutSizingHorizontal
+      node.layoutSizingHorizontal = nextLayoutSizingHorizontal;
     }
 
     if (nextLayoutSizingVertical !== undefined) {
-      node.layoutSizingVertical = nextLayoutSizingVertical
+      node.layoutSizingVertical = nextLayoutSizingVertical;
     }
   }
 
   if (data.itemSpacing !== undefined) {
-    node.itemSpacing = data.itemSpacing
+    node.itemSpacing = data.itemSpacing;
   }
 
   if (data.padding) {
-    node.paddingTop = data.padding.top
-    node.paddingRight = data.padding.right
-    node.paddingBottom = data.padding.bottom
-    node.paddingLeft = data.padding.left
+    node.paddingTop = data.padding.top;
+    node.paddingRight = data.padding.right;
+    node.paddingBottom = data.padding.bottom;
+    node.paddingLeft = data.padding.left;
   }
 
   if (data.clipsContent !== undefined) {
-    node.clipsContent = data.clipsContent
+    node.clipsContent = data.clipsContent;
   }
 }
 
 const FONT_STYLE_BY_WEIGHT: Record<number, string[]> = {
-  100: ['Thin', 'Regular'],
-  200: ['Extra Light', 'Regular'],
-  300: ['Light', 'Regular'],
-  400: ['Regular'],
-  500: ['Medium', 'Regular'],
-  600: ['Semi Bold', 'Medium', 'Regular'],
-  700: ['Bold', 'Regular'],
-  800: ['Extra Bold', 'Bold', 'Regular'],
-  900: ['Black', 'Bold', 'Regular']
-}
+  100: ["Thin", "Regular"],
+  200: ["Extra Light", "Regular"],
+  300: ["Light", "Regular"],
+  400: ["Regular"],
+  500: ["Medium", "Regular"],
+  600: ["Semi Bold", "Medium", "Regular"],
+  700: ["Bold", "Regular"],
+  800: ["Extra Bold", "Bold", "Regular"],
+  900: ["Black", "Bold", "Regular"],
+};
 
 async function loadFontWithFallback(data: TextNodeJSON) {
-  const family = data.fontFamily || 'Inter'
-  const candidateStyles = []
+  const family = data.fontFamily || "Inter";
+  const candidateStyles = [];
 
   if (data.fontStyle) {
-    candidateStyles.push(data.fontStyle)
+    candidateStyles.push(data.fontStyle);
   }
 
   if (data.fontWeight && FONT_STYLE_BY_WEIGHT[data.fontWeight]) {
-    candidateStyles.push(...FONT_STYLE_BY_WEIGHT[data.fontWeight])
+    candidateStyles.push(...FONT_STYLE_BY_WEIGHT[data.fontWeight]);
   }
 
-  candidateStyles.push('Regular')
+  candidateStyles.push("Regular");
 
   for (const style of candidateStyles) {
     try {
       await figma.loadFontAsync({
         family,
-        style
-      })
+        style,
+      });
 
       return {
         family,
-        style
-      }
-    } catch (error) {
+        style,
+      };
+    } catch {
       // Try next style
     }
   }
 
   await figma.loadFontAsync({
-    family: 'Inter',
-    style: 'Regular'
-  })
+    family: "Inter",
+    style: "Regular",
+  });
 
   return {
-    family: 'Inter',
-    style: 'Regular'
-  }
+    family: "Inter",
+    style: "Regular",
+  };
 }
 
 function applyTextSettings(node: TextNode, data: TextNodeJSON) {
   if (data.fontSize !== undefined) {
-    node.fontSize = data.fontSize
+    node.fontSize = data.fontSize;
   }
 
   if (data.textAlign !== undefined) {
-    node.textAlignHorizontal = data.textAlign
+    node.textAlignHorizontal = data.textAlign;
   }
 
   if (data.textDecoration !== undefined) {
-    node.textDecoration = data.textDecoration
+    node.textDecoration = data.textDecoration;
   }
 
   if (data.letterSpacing !== undefined) {
     node.letterSpacing = {
       value: data.letterSpacing,
-      unit: 'PIXELS'
-    }
+      unit: "PIXELS",
+    };
   }
 
   if (data.lineHeight) {
-    if (data.lineHeight.unit === 'AUTO') {
+    if (data.lineHeight.unit === "AUTO") {
       node.lineHeight = {
-        unit: 'AUTO'
-      }
+        unit: "AUTO",
+      };
     } else {
       node.lineHeight = {
         value: data.lineHeight.value,
-        unit: data.lineHeight.unit
-      }
+        unit: data.lineHeight.unit,
+      };
     }
   }
 }
 
 function createWrapperFrame(data: NodeJSON) {
-  const wrapper = figma.createFrame()
-  wrapper.name = data.name ? `${data.name} Wrapper` : `${data.type} Wrapper`
-  wrapper.layoutMode = 'NONE'
-  wrapper.fills = []
-  wrapper.strokes = []
-  wrapper.clipsContent = false
+  const wrapper = figma.createFrame();
+  wrapper.name = data.name ? `${data.name} Wrapper` : `${data.type} Wrapper`;
+  wrapper.layoutMode = "NONE";
+  wrapper.fills = [];
+  wrapper.strokes = [];
+  wrapper.clipsContent = false;
 
-  if (typeof data.width === 'number' && typeof data.height === 'number') {
-    wrapper.resize(data.width, data.height)
+  if (typeof data.width === "number" && typeof data.height === "number") {
+    wrapper.resize(data.width, data.height);
   }
 
-  return wrapper
+  return wrapper;
 }
 
-async function buildChildren(children: NodeJSON[] | undefined, parent: BaseNode) {
+async function buildChildren(
+  children: NodeJSON[] | undefined,
+  parent: BaseNode,
+) {
   if (!children || children.length === 0) {
-    return
+    return;
   }
 
   for (const child of children) {
-    await buildNode(child, parent)
+    await buildNode(child, parent);
   }
 }
 
 export async function buildNode(node: NodeJSON, parent: BaseNode) {
-  if (node.type === 'FRAME') {
-    const frame = figma.createFrame()
-    applyFrameSettings(frame, node)
-    appendToParent(parent, frame)
-    await buildChildren(node.children, frame)
-    return frame
+  if (node.type === "FRAME") {
+    const frame = figma.createFrame();
+    applyFrameSettings(frame, node);
+    appendToParent(parent, frame);
+    await buildChildren(node.children, frame);
+    return frame;
   }
 
-  if (node.type === 'TEXT') {
-    const text = figma.createText()
-    const fontName = await loadFontWithFallback(node)
-    text.fontName = fontName
-    text.characters = node.characters
-    applyCommonStyles(text, node)
-    applyTextSettings(text, node)
+  if (node.type === "TEXT") {
+    const text = figma.createText();
+    const fontName = await loadFontWithFallback(node);
+    text.fontName = fontName;
+    text.characters = node.characters;
+    applyCommonStyles(text, toCommonStyleData(node));
+    applyTextSettings(text, node);
 
-    if (typeof node.width === 'number' && typeof node.height === 'number') {
-      text.resize(node.width, node.height)
+    if (typeof node.width === "number" && typeof node.height === "number") {
+      text.resize(node.width, node.height);
     }
 
     if (node.children && node.children.length > 0) {
-      const wrapper = createWrapperFrame(node)
-      appendToParent(parent, wrapper)
-      wrapper.appendChild(text)
-      await buildChildren(node.children, wrapper)
-      return wrapper
+      const wrapper = createWrapperFrame(node);
+      appendToParent(parent, wrapper);
+      wrapper.appendChild(text);
+      await buildChildren(node.children, wrapper);
+      return wrapper;
     }
 
-    appendToParent(parent, text)
-    return text
+    appendToParent(parent, text);
+    return text;
   }
 
-  if (node.type === 'RECTANGLE') {
-    const rectangle = figma.createRectangle()
-    applyCommonStyles(rectangle, node)
-    applyCornerRadius(rectangle, node)
+  if (node.type === "RECTANGLE") {
+    const rectangle = figma.createRectangle();
+    applyCommonStyles(rectangle, toCommonStyleData(node));
+    applyCornerRadius(rectangle, node);
 
     if (node.children && node.children.length > 0) {
-      const wrapper = createWrapperFrame(node)
-      appendToParent(parent, wrapper)
-      wrapper.appendChild(rectangle)
-      await buildChildren(node.children, wrapper)
-      return wrapper
+      const wrapper = createWrapperFrame(node);
+      appendToParent(parent, wrapper);
+      wrapper.appendChild(rectangle);
+      await buildChildren(node.children, wrapper);
+      return wrapper;
     }
 
-    appendToParent(parent, rectangle)
-    return rectangle
+    appendToParent(parent, rectangle);
+    return rectangle;
   }
 
-  const ellipse = figma.createEllipse()
-  applyCommonStyles(ellipse, node)
+  const ellipse = figma.createEllipse();
+  applyCommonStyles(ellipse, toCommonStyleData(node));
 
   if (node.children && node.children.length > 0) {
-    const wrapper = createWrapperFrame(node)
-    appendToParent(parent, wrapper)
-    wrapper.appendChild(ellipse)
-    await buildChildren(node.children, wrapper)
-    return wrapper
+    const wrapper = createWrapperFrame(node);
+    appendToParent(parent, wrapper);
+    wrapper.appendChild(ellipse);
+    await buildChildren(node.children, wrapper);
+    return wrapper;
   }
 
-  appendToParent(parent, ellipse)
-  return ellipse
+  appendToParent(parent, ellipse);
+  return ellipse;
 }
 
 function formatVariantName(
   properties: Record<string, string>,
-  propertyOrder: string[]
+  propertyOrder: string[],
 ) {
   return propertyOrder
     .map(function (key) {
-      return `${key}=${properties[key]}`
+      return `${key}=${properties[key]}`;
     })
-    .join(', ')
+    .join(", ");
 }
 
 function positionVariantsAsGrid(variants: ComponentNode[], gap = 40) {
   if (variants.length === 0) {
-    return
+    return;
   }
 
-  const columns = Math.max(1, Math.ceil(Math.sqrt(variants.length)))
-  const rowHeights: number[] = []
-  const columnWidths: number[] = []
+  const columns = Math.max(1, Math.ceil(Math.sqrt(variants.length)));
+  const rowHeights: number[] = [];
+  const columnWidths: number[] = [];
 
   variants.forEach(function (variant, index) {
-    const row = Math.floor(index / columns)
-    const column = index % columns
-    rowHeights[row] = Math.max(rowHeights[row] || 0, variant.height)
-    columnWidths[column] = Math.max(columnWidths[column] || 0, variant.width)
-  })
+    const row = Math.floor(index / columns);
+    const column = index % columns;
+    rowHeights[row] = Math.max(rowHeights[row] || 0, variant.height);
+    columnWidths[column] = Math.max(columnWidths[column] || 0, variant.width);
+  });
 
   variants.forEach(function (variant, index) {
-    const row = Math.floor(index / columns)
-    const column = index % columns
+    const row = Math.floor(index / columns);
+    const column = index % columns;
 
-    let x = 0
-    let y = 0
+    let x = 0;
+    let y = 0;
 
     for (let columnIndex = 0; columnIndex < column; columnIndex += 1) {
-      x += (columnWidths[columnIndex] || 0) + gap
+      x += (columnWidths[columnIndex] || 0) + gap;
     }
 
     for (let rowIndex = 0; rowIndex < row; rowIndex += 1) {
-      y += (rowHeights[rowIndex] || 0) + gap
+      y += (rowHeights[rowIndex] || 0) + gap;
     }
 
-    variant.x = x
-    variant.y = y
-  })
+    variant.x = x;
+    variant.y = y;
+  });
 }
 
 export async function buildComponentSet(json: ComponentSetJSON) {
-  const propertyOrder = Object.keys(json.variantProperties)
-  const components: ComponentNode[] = []
+  const propertyOrder = Object.keys(json.variantProperties);
+  const components: ComponentNode[] = [];
 
   for (const variant of json.variants) {
-    const component = figma.createComponent()
-    component.name = formatVariantName(variant.properties, propertyOrder)
+    const component = figma.createComponent();
+    component.name = formatVariantName(variant.properties, propertyOrder);
 
-    if (variant.node.type === 'FRAME') {
-      const { name: _name, ...nodeData } = variant.node
-      applyFrameSettings(component, nodeData)
-      await buildChildren(nodeData.children, component)
+    if (variant.node.type === "FRAME") {
+      const nodeData: FrameNodeJSON = { ...variant.node };
+      delete nodeData.name;
+      applyFrameSettings(component, nodeData);
+      await buildChildren(nodeData.children, component);
     } else {
-      await buildNode(variant.node, component)
+      await buildNode(variant.node, component);
     }
 
-    components.push(component)
+    components.push(component);
   }
 
-  positionVariantsAsGrid(components, 40)
+  positionVariantsAsGrid(components, 40);
 
-  const componentSet = figma.combineAsVariants(components, figma.currentPage)
-  componentSet.name = json.name
+  const componentSet = figma.combineAsVariants(components, figma.currentPage);
+  componentSet.name = json.name;
 
-  if (json.description && 'description' in componentSet) {
-    componentSet.description = json.description
+  if (json.description && "description" in componentSet) {
+    componentSet.description = json.description;
   }
 
   const variantNodes = componentSet.children.filter(function (node) {
-    return node.type === 'COMPONENT'
-  }) as ComponentNode[]
+    return node.type === "COMPONENT";
+  }) as ComponentNode[];
 
-  positionVariantsAsGrid(variantNodes, 40)
+  positionVariantsAsGrid(variantNodes, 40);
 
-  componentSet.x = figma.viewport.center.x - componentSet.width / 2
-  componentSet.y = figma.viewport.center.y - componentSet.height / 2
+  componentSet.x = figma.viewport.center.x - componentSet.width / 2;
+  componentSet.y = figma.viewport.center.y - componentSet.height / 2;
 
-  return componentSet
+  return componentSet;
 }

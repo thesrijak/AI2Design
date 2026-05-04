@@ -24,19 +24,19 @@ Top-level shape:
 
 ```json
 {
-	"name": "Button",
-	"type": "COMPONENT_SET",
-	"description": "Optional description",
-	"variantProperties": {
-		"State": ["Default", "Hover"],
-		"Size": ["Sm", "Md"]
-	},
-	"variants": [
-		{
-			"properties": { "State": "Default", "Size": "Sm" },
-			"node": { "type": "FRAME", "children": [] }
-		}
-	]
+  "name": "Button",
+  "type": "COMPONENT_SET",
+  "description": "Optional description",
+  "variantProperties": {
+    "State": ["Default", "Hover"],
+    "Size": ["Sm", "Md"]
+  },
+  "variants": [
+    {
+      "properties": { "State": "Default", "Size": "Sm" },
+      "node": { "type": "FRAME", "children": [] }
+    }
+  ]
 }
 ```
 
@@ -96,24 +96,24 @@ Effects support:
 
 ```json
 {
-	"name": "Custom",
-	"type": "COMPONENT_SET",
-	"variantProperties": {
-		"Variant": ["Default"]
-	},
-	"variants": [
-		{
-			"properties": { "Variant": "Default" },
-			"node": {
-				"name": "Custom",
-				"type": "FRAME",
-				"layoutMode": "HORIZONTAL",
-				"itemSpacing": 8,
-				"padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
-				"children": []
-			}
-		}
-	]
+  "name": "Custom",
+  "type": "COMPONENT_SET",
+  "variantProperties": {
+    "Variant": ["Default"]
+  },
+  "variants": [
+    {
+      "properties": { "Variant": "Default" },
+      "node": {
+        "name": "Custom",
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "itemSpacing": 8,
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "children": []
+      }
+    }
+  ]
 }
 ```
 
@@ -129,4 +129,3 @@ Note: `manifest.json` is tracked in Git so contributors can import the plugin wi
 - Style tokens for color, typography, and spacing presets.
 - Asset support for images and icons.
 - Importing design systems from external JSON sources.
-

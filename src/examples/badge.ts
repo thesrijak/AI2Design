@@ -1,39 +1,39 @@
-import type { ComponentSetJSON } from '../schema'
+import type { ComponentSetJSON } from "../schema";
 
 export const badgeExample: ComponentSetJSON = {
-  name: 'Badge',
-  type: 'COMPONENT_SET',
+  name: "Badge",
+  type: "COMPONENT_SET",
   variantProperties: {
-    Variant: ['Default']
+    Variant: ["Default"],
   },
   variants: [
     {
       properties: {
-        Variant: 'Default'
+        Variant: "Default",
       },
       node: {
-        name: 'Badge',
-        type: 'FRAME',
-        layoutMode: 'HORIZONTAL',
+        name: "Badge",
+        type: "FRAME",
+        layoutMode: "HORIZONTAL",
         itemSpacing: 6,
         padding: {
           top: 8,
           right: 8,
           bottom: 8,
-          left: 8
+          left: 8,
         },
         cornerRadius: 999,
-        fills: ['#EEF2FF'],
+        fills: ["#EEF2FF"],
         children: [
           {
-            name: 'Text',
-            type: 'TEXT',
-            characters: 'New',
+            name: "Text",
+            type: "TEXT",
+            characters: "New",
             fontSize: 11,
-            fills: ['#7C3AED']
-          }
-        ]
-      }
-    }
-  ]
-}
+            fills: ["#7C3AED"],
+          },
+        ],
+      },
+    },
+  ],
+};

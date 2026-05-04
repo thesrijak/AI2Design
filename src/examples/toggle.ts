@@ -1,45 +1,45 @@
-import type { ComponentSetJSON } from '../schema'
+import type { ComponentSetJSON } from "../schema";
 
 export const toggleExample: ComponentSetJSON = {
-  name: 'Toggle',
-  type: 'COMPONENT_SET',
+  name: "Toggle",
+  type: "COMPONENT_SET",
   variantProperties: {
-    Variant: ['Default']
+    Variant: ["Default"],
   },
   variants: [
     {
       properties: {
-        Variant: 'Default'
+        Variant: "Default",
       },
       node: {
-        name: 'Toggle',
-        type: 'FRAME',
+        name: "Toggle",
+        type: "FRAME",
         width: 52,
         height: 30,
-        layoutMode: 'HORIZONTAL',
-        primaryAxisAlignItems: 'MIN',
-        counterAxisAlignItems: 'CENTER',
+        layoutMode: "HORIZONTAL",
+        primaryAxisAlignItems: "MIN",
+        counterAxisAlignItems: "CENTER",
         itemSpacing: 0,
         padding: {
           top: 4,
           right: 4,
           bottom: 4,
-          left: 4
+          left: 4,
         },
         cornerRadius: 999,
-        fills: ['#7C5AF7'],
+        fills: ["#7C5AF7"],
         children: [
           {
-            name: 'Knob',
-            type: 'FRAME',
+            name: "Knob",
+            type: "FRAME",
             width: 22,
             height: 22,
             cornerRadius: 999,
-            fills: ['#FFFFFF'],
-            children: []
-          }
-        ]
-      }
-    }
-  ]
-}
+            fills: ["#FFFFFF"],
+            children: [],
+          },
+        ],
+      },
+    },
+  ],
+};

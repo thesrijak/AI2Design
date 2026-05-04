@@ -1,0 +1,10 @@
+set -e
+
+if ! npm run -s format:check; then
+	npm run -s format
+	git add -A
+fi
+
+npm run -s lint
+npm run -s typecheck
+npm run -s build
