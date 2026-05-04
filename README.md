@@ -119,7 +119,7 @@ Effects support:
 
 ## Contributing
 
-See [CONTRIBUTION.md](CONTRIBUTION.md) for setup and contribution guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and contribution guidelines.
 
 Note: `manifest.json` is tracked in Git so contributors can import the plugin without running a build first.
 
