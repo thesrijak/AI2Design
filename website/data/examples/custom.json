@@ -1,0 +1,20 @@
+{
+  "name": "Custom",
+  "type": "COMPONENT_SET",
+  "variantProperties": {
+    "Variant": ["Default"]
+  },
+  "variants": [
+    {
+      "properties": { "Variant": "Default" },
+      "node": {
+        "name": "Custom",
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "itemSpacing": 8,
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "children": []
+      }
+    }
+  ]
+}

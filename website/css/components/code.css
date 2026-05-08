@@ -1,0 +1,127 @@
+/* =========================================================
+   Code — pre/code blocks with syntax highlighting
+   ========================================================= */
+
+.code-block {
+  position: relative;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* --- Header bar --- */
+
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.code-block__lang {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* --- Scrollable body --- */
+
+.code-block__body {
+  overflow-x: auto;
+  padding: var(--space-5) var(--space-5);
+}
+
+.code-block__body pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-primary);
+  white-space: pre;
+}
+
+/* --- Syntax tokens (applied by highlight.js module) --- */
+
+.tok-string {
+  color: var(--color-code-string);
+}
+.tok-number {
+  color: var(--color-code-number);
+}
+.tok-key {
+  color: var(--color-code-key);
+}
+.tok-bool {
+  color: var(--color-code-bool);
+}
+.tok-null {
+  color: var(--color-code-null);
+}
+.tok-brace {
+  color: var(--color-text-secondary);
+}
+.tok-colon {
+  color: var(--color-text-muted);
+}
+
+/* --- JSON editor textarea --- */
+
+.code-editor {
+  width: 100%;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
+  color: var(--color-code-string);
+  resize: none;
+  outline: none;
+  transition: border-color var(--transition-base);
+  min-height: 320px;
+}
+
+.code-editor:focus {
+  border-color: hsl(14.8 63.1% 59.6% / 0.5);
+  box-shadow: var(--shadow-accent);
+}
+
+.code-editor::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* --- Copy button (inside code block header) --- */
+
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    color var(--transition-base),
+    background var(--transition-base),
+    border-color var(--transition-base);
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.copy-btn.is-copied {
+  color: var(--color-success);
+}

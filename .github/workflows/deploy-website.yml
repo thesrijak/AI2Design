@@ -1,0 +1,71 @@
+# =============================================================
+# deploy-website.yml
+#
+# Deploys the website/ directory to GitHub Pages on every push
+# to main that touches website files or this workflow file.
+#
+# Custom domain: add a CNAME file inside website/ containing
+# your domain (e.g. ai2design.dev). No workflow changes needed.
+#
+# Setup (one-time):
+#   1. Go to repo Settings → Pages
+#   2. Set Source to "GitHub Actions"
+#   3. (Optional) Add your custom domain under "Custom domain"
+# =============================================================
+
+name: Deploy Website
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "website/**"
+      - ".github/workflows/deploy-website.yml"
+
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+# Only one deployment can run at a time; cancel stale runs.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # ─── Build ───────────────────────────────────────────────
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # The website is pure static files — no build step required.
+      # Upload the website/ directory directly as the Pages artifact.
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./website
+
+  # ─── Deploy ──────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

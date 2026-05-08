@@ -1,0 +1,151 @@
+/* =========================================================
+   Design Tokens — Anthropic / Claude.ai design system.
+   Warm light-mode palette with clay accent.
+   ========================================================= */
+
+:root {
+  /* ── Raw gray scale (warm, hue ~45-60) ──────────────────
+     Matches Claude.ai's --_gray-* scale exactly.          */
+  --_gray-10: hsl(60 14% 99%); /* near white         */
+  --_gray-20: hsl(60 14% 97%); /* body bg  #F8F8F6   */
+  --_gray-30: hsl(60 10% 96%); /* subtle bg          */
+  --_gray-50: hsl(45 12% 93%); /* surface            */
+  --_gray-100: hsl(53 12% 87%); /* raised surface     */
+  --_gray-150: hsl(55 11% 80%); /* border strong      */
+  --_gray-200: hsl(55 9% 74%); /* border / muted     */
+  --_gray-350: hsl(48 5% 57%); /* secondary text     */
+  --_gray-500: hsl(40 3% 42%); /* secondary text+    */
+  --_gray-700: hsl(60 3% 21%); /* heading dark       */
+  --_gray-800: hsl(60 2% 12%); /* primary text       */
+  --_gray-900: hsl(0 0% 4%); /* near black         */
+
+  /* ── Brand / Accent (Anthropic clay) ───────────────────  */
+  --_clay: hsl(14.8 63.1% 59.6%); /* #D97757  */
+  --_clay-emphasized: hsl(15.1 54.2% 51.2%); /* #C06040  */
+
+  /* ── Semantic: Backgrounds ──────────────────────────────  */
+  --color-bg: var(--_gray-20); /* #F8F8F6  */
+  --color-bg-subtle: var(--_gray-30); /* slightly darker */
+  --color-surface: var(--_gray-50); /* card face */
+  --color-surface-raised: var(--_gray-100); /* lifted element */
+  --color-surface-hover: var(--_gray-150); /* hover state  */
+
+  /* ── Semantic: Nav background (with alpha for blur) ────  */
+  --color-nav-bg: hsl(60 14% 97% / 0.88);
+
+  /* ── Semantic: Borders ──────────────────────────────────  */
+  --color-border: hsl(55 9% 74% / 0.6); /* soft warm line */
+  --color-border-subtle: hsl(55 9% 74% / 0.3);
+  --color-border-strong: hsl(55 9% 74% / 0.9);
+
+  /* ── Semantic: Accent (clay / copper) ──────────────────  */
+  --color-accent: var(--_clay);
+  --color-accent-hover: var(--_clay-emphasized);
+  --color-accent-active: hsl(15 58% 44%);
+  --color-accent-muted: hsl(14.8 63.1% 59.6% / 0.12);
+  --color-accent-glow: hsl(14.8 63.1% 59.6% / 0.25);
+  /* Convenience RGB tuple for inline rgba() use */
+  --_clay-r: 217;
+  --_clay-g: 119;
+  --_clay-b: 87;
+
+  /* ── Semantic: Text ─────────────────────────────────────  */
+  --color-text-primary: var(--_gray-800); /* #1F1E1D  */
+  --color-text-secondary: var(--_gray-500); /* #6B6863  */
+  --color-text-muted: hsl(40 3% 42% / 0.45);
+  --color-text-inverse: var(--_gray-20);
+
+  /* ── Semantic: Status ───────────────────────────────────  */
+  --color-success: hsl(142 72% 29%);
+  --color-success-muted: hsl(142 72% 29% / 0.1);
+  --color-error: hsl(0 72% 51%);
+  --color-error-muted: hsl(0 72% 51% / 0.1);
+  --color-warning: hsl(38 92% 50%);
+  --color-info: hsl(214 90% 52%);
+
+  /* ── Code blocks (warm light theme) ────────────────────  */
+  --color-code-bg: var(--_gray-50); /* warm light   */
+  --color-code-string: hsl(142 60% 28%); /* forest green */
+  --color-code-number: hsl(262 60% 46%); /* violet       */
+  --color-code-key: hsl(214 80% 40%); /* ocean blue   */
+  --color-code-bool: hsl(0 65% 44%); /* deep red     */
+  --color-code-null: hsl(30 6% 55%); /* warm gray    */
+
+  /* ── Typography ─────────────────────────────────────────
+     Anthropic uses "Anthropic Sans" / "Anthropic Serif".
+     We use Inter (already loaded) as the sans-serif, and
+     Georgia as the serif fallback — closest publicly available
+     fonts to the Claude.ai aesthetic.                       */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Type scale */
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --text-4xl: 42px;
+  --text-5xl: 56px;
+
+  /* Font weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* Line heights */
+  --leading-tight: 1.2;
+  --leading-snug: 1.4;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* ── Spacing (4px base) ─────────────────────────────────  */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* ── Layout ─────────────────────────────────────────────  */
+  --container-max: 1120px;
+  --container-narrow: 720px;
+  --nav-height: 60px;
+
+  /* ── Border radius ──────────────────────────────────────  */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (warm-tinted) ──────────────────────────────  */
+  --shadow-sm: 0 1px 3px hsl(30 6% 10% / 0.08), 0 1px 2px hsl(30 6% 10% / 0.06);
+  --shadow-md: 0 4px 12px hsl(30 6% 10% / 0.1), 0 2px 4px hsl(30 6% 10% / 0.06);
+  --shadow-lg:
+    0 16px 40px hsl(30 6% 10% / 0.12), 0 4px 12px hsl(30 6% 10% / 0.08);
+  --shadow-accent: 0 0 0 3px hsl(14.8 63.1% 59.6% / 0.2);
+
+  /* ── Transitions ────────────────────────────────────────  */
+  --transition-fast: 100ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 350ms ease;
+
+  /* ── Z-index ────────────────────────────────────────────  */
+  --z-base: 1;
+  --z-overlay: 10;
+  --z-nav: 100;
+  --z-modal: 200;
+}
