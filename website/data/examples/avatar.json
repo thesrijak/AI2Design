@@ -1,0 +1,959 @@
+{
+  "name": "Avatar",
+  "type": "COMPONENT_SET",
+  "description": "User avatar — circular initials with presence chip. Size × Presence variants.",
+  "variantProperties": {
+    "Size": ["Sm", "Md", "Lg"],
+    "Presence": ["Online", "Away", "Busy", "Offline"]
+  },
+  "variants": [
+    {
+      "properties": { "Size": "Sm", "Presence": "Online" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 10, "right": 10, "bottom": 10, "left": 10 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 12,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#DCFCE7"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#16A34A"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Online",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#15803D"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Sm", "Presence": "Away" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 10, "right": 10, "bottom": 10, "left": 10 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 12,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#FDE8DC"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#D97757"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Away",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#AE5535"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Sm", "Presence": "Busy" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 10, "right": 10, "bottom": 10, "left": 10 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 12,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#FEE2E2"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#DC2626"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Busy",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#B91C1C"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Sm", "Presence": "Offline" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 10, "right": 10, "bottom": 10, "left": 10 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 12,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#F3F4F6"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#9CA3AF"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Offline",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#6B7280"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Md", "Presence": "Online" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 13, "right": 13, "bottom": 13, "left": 13 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 14,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#DCFCE7"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#16A34A"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Online",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#15803D"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Md", "Presence": "Away" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 13, "right": 13, "bottom": 13, "left": 13 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 14,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#FDE8DC"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#D97757"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Away",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#AE5535"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Md", "Presence": "Busy" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 13, "right": 13, "bottom": 13, "left": 13 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 14,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#FEE2E2"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#DC2626"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Busy",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#B91C1C"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Md", "Presence": "Offline" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 13, "right": 13, "bottom": 13, "left": 13 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 14,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#F3F4F6"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 6,
+                "height": 6,
+                "fills": ["#9CA3AF"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Offline",
+                "fontSize": 10,
+                "fontWeight": 500,
+                "fills": ["#6B7280"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Lg", "Presence": "Online" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 15, "right": 15, "bottom": 15, "left": 15 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 17,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#DCFCE7"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 7,
+                "height": 7,
+                "fills": ["#16A34A"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Online",
+                "fontSize": 11,
+                "fontWeight": 500,
+                "fills": ["#15803D"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Lg", "Presence": "Away" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 15, "right": 15, "bottom": 15, "left": 15 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 17,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#FDE8DC"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 7,
+                "height": 7,
+                "fills": ["#D97757"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Away",
+                "fontSize": 11,
+                "fontWeight": 500,
+                "fills": ["#AE5535"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Lg", "Presence": "Busy" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 15, "right": 15, "bottom": 15, "left": 15 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 17,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#FEE2E2"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 7,
+                "height": 7,
+                "fills": ["#DC2626"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Busy",
+                "fontSize": 11,
+                "fontWeight": 500,
+                "fills": ["#B91C1C"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "Size": "Lg", "Presence": "Offline" },
+      "node": {
+        "name": "Avatar",
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 15, "right": 15, "bottom": 15, "left": 15 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [
+              {
+                "type": "LINEAR_GRADIENT",
+                "angle": 145,
+                "stops": [
+                  { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                  { "r": 0.973, "g": 0.843, "b": 0.8, "a": 1, "position": 1 }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "name": "Initials",
+                "type": "TEXT",
+                "characters": "JD",
+                "fontSize": 17,
+                "fontWeight": 600,
+                "fills": ["#AE5535"]
+              }
+            ]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#F3F4F6"],
+            "children": [
+              {
+                "name": "Dot",
+                "type": "ELLIPSE",
+                "width": 7,
+                "height": 7,
+                "fills": ["#9CA3AF"]
+              },
+              {
+                "name": "Label",
+                "type": "TEXT",
+                "characters": "Offline",
+                "fontSize": 11,
+                "fontWeight": 500,
+                "fills": ["#6B7280"]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

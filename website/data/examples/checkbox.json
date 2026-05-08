@@ -1,0 +1,205 @@
+{
+  "name": "Checkbox",
+  "type": "COMPONENT_SET",
+  "description": "Checkbox with label. Unchecked, Checked, Indeterminate, and Disabled states.",
+  "variantProperties": {
+    "State": ["Unchecked", "Checked", "Indeterminate", "Disabled"]
+  },
+  "variants": [
+    {
+      "properties": { "State": "Unchecked" },
+      "node": {
+        "name": "Checkbox",
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 9,
+        "fills": [],
+        "children": [
+          {
+            "name": "Box",
+            "type": "FRAME",
+            "width": 18,
+            "height": 18,
+            "layoutSizingHorizontal": "FIXED",
+            "layoutSizingVertical": "FIXED",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+            "itemSpacing": 0,
+            "cornerRadius": 5,
+            "fills": ["#FFFFFF"],
+            "strokes": ["#D1D5DB"],
+            "strokeWeight": 1.5,
+            "strokePosition": "INSIDE",
+            "children": []
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "characters": "Accept terms and conditions",
+            "fontSize": 13,
+            "fontWeight": 400,
+            "fills": ["#111827"]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "State": "Checked" },
+      "node": {
+        "name": "Checkbox",
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 9,
+        "fills": [],
+        "children": [
+          {
+            "name": "Box",
+            "type": "FRAME",
+            "width": 18,
+            "height": 18,
+            "layoutSizingHorizontal": "FIXED",
+            "layoutSizingVertical": "FIXED",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+            "itemSpacing": 0,
+            "cornerRadius": 5,
+            "fills": ["#D97757"],
+            "strokes": [],
+            "strokeWeight": 0,
+            "strokePosition": "INSIDE",
+            "children": [
+              {
+                "name": "Check",
+                "type": "TEXT",
+                "characters": "✓",
+                "fontSize": 11,
+                "fontWeight": 700,
+                "fills": ["#FFFFFF"]
+              }
+            ]
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "characters": "Accept terms and conditions",
+            "fontSize": 13,
+            "fontWeight": 400,
+            "fills": ["#111827"]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "State": "Indeterminate" },
+      "node": {
+        "name": "Checkbox",
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 9,
+        "fills": [],
+        "children": [
+          {
+            "name": "Box",
+            "type": "FRAME",
+            "width": 18,
+            "height": 18,
+            "layoutSizingHorizontal": "FIXED",
+            "layoutSizingVertical": "FIXED",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+            "itemSpacing": 0,
+            "cornerRadius": 5,
+            "fills": ["#D97757"],
+            "strokes": [],
+            "strokeWeight": 0,
+            "strokePosition": "INSIDE",
+            "children": [
+              {
+                "name": "Dash",
+                "type": "RECTANGLE",
+                "width": 8,
+                "height": 2,
+                "cornerRadius": 1,
+                "fills": ["#FFFFFF"]
+              }
+            ]
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "characters": "Accept terms and conditions",
+            "fontSize": 13,
+            "fontWeight": 400,
+            "fills": ["#111827"]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "State": "Disabled" },
+      "node": {
+        "name": "Checkbox",
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 9,
+        "opacity": 0.55,
+        "fills": [],
+        "children": [
+          {
+            "name": "Box",
+            "type": "FRAME",
+            "width": 18,
+            "height": 18,
+            "layoutSizingHorizontal": "FIXED",
+            "layoutSizingVertical": "FIXED",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+            "itemSpacing": 0,
+            "cornerRadius": 5,
+            "fills": ["#F3F4F6"],
+            "strokes": ["#E5E7EB"],
+            "strokeWeight": 1.5,
+            "strokePosition": "INSIDE",
+            "children": []
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "characters": "Accept terms and conditions",
+            "fontSize": 13,
+            "fontWeight": 400,
+            "fills": ["#9CA3AF"]
+          }
+        ]
+      }
+    }
+  ]
+}
