@@ -556,6 +556,24 @@
                 <td>EffectJSON[]</td>
                 <td>Layer effects. See Effects.</td>
               </tr>
+              <tr>
+                <td>layoutSizingHorizontal</td>
+                <td>"FIXED" | "HUG" | "FILL"</td>
+                <td>
+                  Sizing on the horizontal axis inside an auto-layout parent.
+                  Valid on any node type. <code>"FILL"</code> stretches to fill
+                  the parent; <code>"HUG"</code> wraps content (FRAME only);
+                  <code>"FIXED"</code> keeps the explicit width.
+                </td>
+              </tr>
+              <tr>
+                <td>layoutSizingVertical</td>
+                <td>"FIXED" | "HUG" | "FILL"</td>
+                <td>
+                  Sizing on the vertical axis inside an auto-layout parent. Same
+                  rules as <code>layoutSizingHorizontal</code>.
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -890,12 +908,16 @@
         </div>
 
         <div class="docs-callout">
-          <span class="docs-callout__icon">⚠️</span>
+          <span class="docs-callout__icon">💡</span>
           <span
-            ><code>"HUG"</code> and <code>"FILL"</code> values for
-            <code>width</code> or <code>height</code> are only valid on FRAME
-            nodes with <code>layoutMode</code> set to
-            <code>"HORIZONTAL"</code> or <code>"VERTICAL"</code>.</span
+            ><code>layoutSizingHorizontal</code> and
+            <code>layoutSizingVertical</code> work on
+            <strong>any node type</strong> (FRAME, TEXT, RECTANGLE, ELLIPSE)
+            when that node is a child of an auto-layout FRAME. Use
+            <code>"FILL"</code> on a TEXT node to make it stretch to the parent
+            width and wrap text. Use <code>"FIXED"</code> on a FRAME with an
+            explicit <code>width</code>/<code>height</code> to prevent Figma
+            from defaulting to HUG when <code>layoutMode</code> is set.</span
           >
         </div>
 
@@ -1086,6 +1108,266 @@
             "characters": "Continue",
             "fontSize": 12,
             "fills": ["#FFFFFF"]
+          }
+        ]
+      }
+    }
+  ]
+}</pre
+              >
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary
+            style="
+              cursor: pointer;
+              font-size: var(--text-base);
+              font-weight: var(--weight-semibold);
+              padding: var(--space-2) 0;
+              color: var(--color-text-primary);
+            "
+          >
+            Checkbox (State — FIXED sizing + FILL text)
+          </summary>
+          <div class="code-block" style="margin-top: var(--space-3)">
+            <div class="code-block__header">
+              <span class="code-block__lang">JSON</span
+              ><button
+                class="copy-btn"
+                data-copy-target="ex-checkbox"
+                aria-label="Copy code"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  aria-hidden="true"
+                >
+                  <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                  <path
+                    d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                  /></svg
+                >Copy
+              </button>
+            </div>
+            <div class="code-block__body">
+              <pre id="ex-checkbox">
+{
+  "name": "Checkbox",
+  "type": "COMPONENT_SET",
+  "variantProperties": {
+    "State": ["Unchecked", "Checked"]
+  },
+  "variants": [
+    {
+      "properties": { "State": "Unchecked" },
+      "node": {
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 9,
+        "fills": [],
+        "children": [
+          {
+            "name": "Box",
+            "type": "FRAME",
+            "width": 18,
+            "height": 18,
+            "layoutSizingHorizontal": "FIXED",
+            "layoutSizingVertical": "FIXED",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+            "itemSpacing": 0,
+            "cornerRadius": 5,
+            "fills": ["#FFFFFF"],
+            "strokes": ["#D1D5DB"],
+            "strokeWeight": 1.5,
+            "strokePosition": "INSIDE",
+            "children": []
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "characters": "Accept terms and conditions",
+            "fontSize": 13,
+            "fontWeight": 400,
+            "fills": ["#111827"]
+          }
+        ]
+      }
+    },
+    {
+      "properties": { "State": "Checked" },
+      "node": {
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "MIN",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 9,
+        "fills": [],
+        "children": [
+          {
+            "name": "Box",
+            "type": "FRAME",
+            "width": 18,
+            "height": 18,
+            "layoutSizingHorizontal": "FIXED",
+            "layoutSizingVertical": "FIXED",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+            "itemSpacing": 0,
+            "cornerRadius": 5,
+            "fills": ["#D97757"],
+            "strokes": [],
+            "strokeWeight": 0,
+            "strokePosition": "INSIDE",
+            "children": [
+              {
+                "name": "Check",
+                "type": "TEXT",
+                "characters": "✓",
+                "fontSize": 11,
+                "fontWeight": 700,
+                "fills": ["#FFFFFF"]
+              }
+            ]
+          },
+          {
+            "name": "Label",
+            "type": "TEXT",
+            "characters": "Accept terms and conditions",
+            "fontSize": 13,
+            "fontWeight": 400,
+            "fills": ["#111827"]
+          }
+        ]
+      }
+    }
+  ]
+}</pre
+              >
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary
+            style="
+              cursor: pointer;
+              font-size: var(--text-base);
+              font-weight: var(--weight-semibold);
+              padding: var(--space-2) 0;
+              color: var(--color-text-primary);
+            "
+          >
+            Avatar (Size × Presence — gradients, ellipse dot, FILL text)
+          </summary>
+          <div class="code-block" style="margin-top: var(--space-3)">
+            <div class="code-block__header">
+              <span class="code-block__lang">JSON</span
+              ><button
+                class="copy-btn"
+                data-copy-target="ex-avatar"
+                aria-label="Copy code"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  aria-hidden="true"
+                >
+                  <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                  <path
+                    d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                  /></svg
+                >Copy
+              </button>
+            </div>
+            <div class="code-block__body">
+              <pre id="ex-avatar">
+{
+  "name": "Avatar",
+  "type": "COMPONENT_SET",
+  "variantProperties": {
+    "Presence": ["Online", "Offline"]
+  },
+  "variants": [
+    {
+      "properties": { "Presence": "Online" },
+      "node": {
+        "type": "FRAME",
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "itemSpacing": 6,
+        "fills": [],
+        "children": [
+          {
+            "name": "Circle",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 13, "right": 13, "bottom": 13, "left": 13 },
+            "itemSpacing": 0,
+            "cornerRadius": 999,
+            "fills": [{
+              "type": "LINEAR_GRADIENT",
+              "angle": 145,
+              "stops": [
+                { "r": 0.988, "g": 0.906, "b": 0.863, "a": 1, "position": 0 },
+                { "r": 0.973, "g": 0.843, "b": 0.800, "a": 1, "position": 1 }
+              ]
+            }],
+            "children": [{
+              "name": "Initials",
+              "type": "TEXT",
+              "characters": "JD",
+              "fontSize": 14,
+              "fontWeight": 600,
+              "fills": ["#AE5535"]
+            }]
+          },
+          {
+            "name": "PresenceChip",
+            "type": "FRAME",
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "padding": { "top": 3, "right": 7, "bottom": 3, "left": 5 },
+            "itemSpacing": 4,
+            "cornerRadius": 999,
+            "fills": ["#DCFCE7"],
+            "children": [
+              { "name": "Dot", "type": "ELLIPSE", "width": 6, "height": 6, "fills": ["#16A34A"] },
+              { "name": "Label", "type": "TEXT", "characters": "Online", "fontSize": 10, "fontWeight": 500, "fills": ["#15803D"] }
+            ]
           }
         ]
       }

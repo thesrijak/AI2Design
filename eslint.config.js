@@ -38,6 +38,12 @@ module.exports = [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
+      // h and Fragment are JSX factory imports (jsxFactory/jsxFragmentFactory in
+      // tsconfig). They appear unused to ESLint but are required by the transpiler.
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { varsIgnorePattern: "^(h|Fragment)$", argsIgnorePattern: "^_" },
+      ],
     },
   },
 ];

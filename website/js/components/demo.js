@@ -1,14 +1,23 @@
 /**
  * Demo module — interactive JSON schema editor + live preview pane.
  *
- * Available examples: button, card, badge, input, toggle, custom
+ * Available examples: button, input, checkbox, toggle, badge, card, avatar, custom
  * JSON files live at: ../data/examples/<name>.json
  */
 
 import { validateSchema } from "./schema-validator.js";
 import { debounce } from "../lib/debounce.js";
 
-const EXAMPLES = ["button", "card", "badge", "input", "toggle", "custom"];
+const EXAMPLES = [
+  "button",
+  "input",
+  "checkbox",
+  "toggle",
+  "badge",
+  "card",
+  "avatar",
+  "custom",
+];
 
 /** @type {Record<string, string>} loaded example cache */
 const cache = {};

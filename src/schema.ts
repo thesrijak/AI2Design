@@ -117,6 +117,8 @@ export interface BaseNodeJSON {
   strokeDashes?: number[];
   effects?: EffectJSON[];
   children?: NodeJSON[];
+  layoutSizingHorizontal?: LayoutSizingJSON;
+  layoutSizingVertical?: LayoutSizingJSON;
 }
 
 export interface FrameNodeJSON extends BaseNodeJSON {

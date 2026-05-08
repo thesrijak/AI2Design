@@ -312,31 +312,10 @@ function applyFrameSettings(
     node.counterAxisAlignItems = data.counterAxisAlignItems;
   }
 
-  if ("layoutSizingHorizontal" in node && "layoutSizingVertical" in node) {
-    const widthKeyword =
-      data.width === "HUG" || data.width === "FILL" ? data.width : undefined;
-    const heightKeyword =
-      data.height === "HUG" || data.height === "FILL" ? data.height : undefined;
-    const canAutoLayout = node.layoutMode !== "NONE";
-    const nextLayoutSizingHorizontal =
-      data.layoutSizingHorizontal ??
-      (canAutoLayout
-        ? (widthKeyword ?? (data.width === undefined ? "HUG" : undefined))
-        : undefined);
-    const nextLayoutSizingVertical =
-      data.layoutSizingVertical ??
-      (canAutoLayout
-        ? (heightKeyword ?? (data.height === undefined ? "HUG" : undefined))
-        : undefined);
-
-    if (nextLayoutSizingHorizontal !== undefined) {
-      node.layoutSizingHorizontal = nextLayoutSizingHorizontal;
-    }
-
-    if (nextLayoutSizingVertical !== undefined) {
-      node.layoutSizingVertical = nextLayoutSizingVertical;
-    }
-  }
+  // NOTE: layoutSizing is intentionally NOT applied here.
+  // FILL requires the node to already be a child of an auto-layout frame,
+  // so it must be applied AFTER appendToParent. Call applyLayoutSizing()
+  // separately once the node has been inserted into its parent.
 
   if (data.itemSpacing !== undefined) {
     node.itemSpacing = data.itemSpacing;
@@ -352,6 +331,44 @@ function applyFrameSettings(
   if (data.clipsContent !== undefined) {
     node.clipsContent = data.clipsContent;
   }
+}
+
+type SizableNode = SceneNode & {
+  layoutSizingHorizontal: "FIXED" | "HUG" | "FILL";
+  layoutSizingVertical: "FIXED" | "HUG" | "FILL";
+};
+
+function isSizable(node: SceneNode): node is SizableNode {
+  return "layoutSizingHorizontal" in node && "layoutSizingVertical" in node;
+}
+
+// Apply layoutSizing AFTER the node has been appended to its parent.
+// For frames: defaults to HUG when unspecified (matches Figma's auto-layout behaviour).
+// For non-frames (text, etc.): only applies what is explicitly set in data.
+function applyLayoutSizing(node: SceneNode, data: CommonStyleData) {
+  if (!isSizable(node)) return;
+
+  const isFrame = node.type === "FRAME" || node.type === "COMPONENT";
+  const canAutoLayout = isFrame && (node as FrameNode).layoutMode !== "NONE";
+
+  const widthKeyword =
+    data.width === "HUG" || data.width === "FILL" ? data.width : undefined;
+  const heightKeyword =
+    data.height === "HUG" || data.height === "FILL" ? data.height : undefined;
+
+  const nextH =
+    data.layoutSizingHorizontal ??
+    (canAutoLayout
+      ? (widthKeyword ?? (data.width === undefined ? "HUG" : undefined))
+      : undefined);
+  const nextV =
+    data.layoutSizingVertical ??
+    (canAutoLayout
+      ? (heightKeyword ?? (data.height === undefined ? "HUG" : undefined))
+      : undefined);
+
+  if (nextH !== undefined) node.layoutSizingHorizontal = nextH;
+  if (nextV !== undefined) node.layoutSizingVertical = nextV;
 }
 
 const FONT_STYLE_BY_WEIGHT: Record<number, string[]> = {
@@ -474,6 +491,7 @@ export async function buildNode(node: NodeJSON, parent: BaseNode) {
     const frame = figma.createFrame();
     applyFrameSettings(frame, node);
     appendToParent(parent, frame);
+    applyLayoutSizing(frame, toCommonStyleData(node));
     await buildChildren(node.children, frame);
     return frame;
   }
@@ -499,6 +517,7 @@ export async function buildNode(node: NodeJSON, parent: BaseNode) {
     }
 
     appendToParent(parent, text);
+    applyLayoutSizing(text, toCommonStyleData(node));
     return text;
   }
 
@@ -585,6 +604,8 @@ export async function buildComponentSet(json: ComponentSetJSON) {
   const propertyOrder = Object.keys(json.variantProperties);
   const components: ComponentNode[] = [];
 
+  const variantNodeDatas: (FrameNodeJSON | null)[] = [];
+
   for (const variant of json.variants) {
     const component = figma.createComponent();
     component.name = formatVariantName(variant.properties, propertyOrder);
@@ -594,8 +615,10 @@ export async function buildComponentSet(json: ComponentSetJSON) {
       delete nodeData.name;
       applyFrameSettings(component, nodeData);
       await buildChildren(nodeData.children, component);
+      variantNodeDatas.push(nodeData);
     } else {
       await buildNode(variant.node, component);
+      variantNodeDatas.push(null);
     }
 
     components.push(component);
@@ -604,6 +627,15 @@ export async function buildComponentSet(json: ComponentSetJSON) {
   positionVariantsAsGrid(components, 40);
 
   const componentSet = figma.combineAsVariants(components, figma.currentPage);
+
+  // Apply layoutSizing AFTER combineAsVariants — root ComponentNodes are now
+  // children of the ComponentSet (an auto-layout frame), so FILL is valid.
+  components.forEach(function (component, i) {
+    const nodeData = variantNodeDatas[i];
+    if (nodeData !== null) {
+      applyLayoutSizing(component, toCommonStyleData(nodeData));
+    }
+  });
   componentSet.name = json.name;
 
   if (json.description && "description" in componentSet) {
