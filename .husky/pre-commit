@@ -2,7 +2,7 @@ set -e
 
 if ! npm run -s format:check; then
 	npm run -s format
-	git add -A
+	git add -u
 fi
 
 npm run -s lint
