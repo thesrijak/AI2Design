@@ -1,0 +1,1272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation — AI2Design</title>
+    <meta
+      name="description"
+      content="Full reference documentation for the AI2Design JSON schema — node types, variant properties, fills, effects, layout, and typography."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Documentation — AI2Design" />
+    <meta
+      property="og:description"
+      content="Full reference for the AI2Design JSON schema."
+    />
+    <meta property="og:image" content="assets/og-image.png" />
+
+    <!-- Preconnect fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components/nav.css" />
+    <link rel="stylesheet" href="css/components/button.css" />
+    <link rel="stylesheet" href="css/components/badge.css" />
+    <link rel="stylesheet" href="css/components/code.css" />
+    <link rel="stylesheet" href="css/components/footer.css" />
+    <link rel="stylesheet" href="css/pages/docs.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <header class="nav" role="banner">
+      <div class="container nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="AI2Design home">
+          <svg
+            class="nav__logo-icon"
+            viewBox="0 0 28 28"
+            fill="none"
+            aria-hidden="true"
+          >
+            <rect
+              width="28"
+              height="28"
+              rx="7"
+              fill="#D97757"
+              fill-opacity="0.12"
+            />
+            <path
+              d="M9 20L14 8L19 20M11.5 15.5H16.5"
+              stroke="#D97757"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          AI2Design
+        </a>
+
+        <nav class="nav__links" aria-label="Main navigation">
+          <a href="index.html#features" class="nav__link">Features</a>
+          <a href="index.html#how-it-works" class="nav__link">How it works</a>
+          <a href="index.html#demo" class="nav__link">Demo</a>
+          <a href="docs.html" class="nav__link" aria-current="page">Docs</a>
+        </nav>
+
+        <div class="nav__actions">
+          <button
+            class="btn btn--ghost btn--sm docs-sidebar-toggle"
+            aria-label="Toggle sidebar"
+            aria-expanded="false"
+            aria-controls="docs-sidebar"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              aria-hidden="true"
+            >
+              <path d="M1 4h14M1 8h10M1 12h14" />
+            </svg>
+            Menu
+          </button>
+          <a
+            href="https://github.com/thesrijak/AI2Design"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--ghost btn--sm"
+            >GitHub</a
+          >
+          <a href="index.html#install" class="btn btn--primary btn--sm"
+            >Install Plugin</a
+          >
+        </div>
+
+        <button
+          class="nav__toggle"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="nav-drawer"
+        >
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile nav drawer -->
+    <div class="nav__drawer" id="nav-drawer" aria-hidden="true">
+      <a href="index.html#features" class="nav__drawer-link">Features</a>
+      <a href="index.html#how-it-works" class="nav__drawer-link"
+        >How it works</a
+      >
+      <a href="index.html#demo" class="nav__drawer-link">Demo</a>
+      <a href="docs.html" class="nav__drawer-link">Docs</a>
+      <div class="nav__drawer-actions">
+        <a
+          href="https://github.com/thesrijak/AI2Design"
+          target="_blank"
+          rel="noopener"
+          class="btn btn--ghost btn--full"
+          >GitHub</a
+        >
+        <a href="index.html#install" class="btn btn--primary btn--full"
+          >Install Plugin</a
+        >
+      </div>
+    </div>
+
+    <!-- DOCS LAYOUT -->
+    <div class="docs-layout">
+      <!-- Sidebar -->
+      <aside
+        class="docs-sidebar"
+        id="docs-sidebar"
+        aria-label="Documentation navigation"
+      >
+        <!-- Generated by docs.js from heading IDs -->
+      </aside>
+
+      <!-- Main content -->
+      <article class="docs-content">
+        <!-- =============================================
+           Getting Started
+      ============================================= -->
+        <h1 id="getting-started">Getting Started</h1>
+
+        <p>
+          AI2Design is a free Figma plugin that reads a JSON schema and produces
+          a fully editable <strong>ComponentSet</strong> (a component with
+          multiple variants) directly on your current Figma page.
+        </p>
+
+        <p>
+          No Figma API knowledge is required. You write JSON that describes your
+          component — its name, variant axes, and the visual tree of each
+          variant — and the plugin handles the rest.
+        </p>
+
+        <div class="docs-callout">
+          <span class="docs-callout__icon">💡</span>
+          <span
+            >AI2Design requires the Figma desktop app or Figma in the browser.
+            It does not run in FigJam.</span
+          >
+        </div>
+
+        <h3 id="quick-start">Quick start</h3>
+
+        <ol>
+          <li>
+            Install AI2Design from the Figma Community (search
+            <em>AI2Design</em>).
+          </li>
+          <li>
+            Open a Figma document and run the plugin from the Plugins menu.
+          </li>
+          <li>
+            Choose a built-in example from the dropdown, or paste your own JSON.
+          </li>
+          <li>
+            Click <strong>Apply Design</strong>. The component set appears
+            centred in your viewport.
+          </li>
+        </ol>
+
+        <!-- =============================================
+           Schema Overview
+      ============================================= -->
+        <h2 id="schema-overview">JSON Schema Overview</h2>
+
+        <p>
+          Every JSON payload must be a single object with
+          <code>type: "COMPONENT_SET"</code> at the root. Here is the minimal
+          shape:
+        </p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span>
+            <button
+              class="copy-btn"
+              data-copy-target="cb-schema-overview"
+              aria-label="Copy code"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path
+                  d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                />
+              </svg>
+              Copy
+            </button>
+          </div>
+          <div class="code-block__body">
+            <pre id="cb-schema-overview">
+{
+  "name": "Button",
+  "type": "COMPONENT_SET",
+  "description": "Optional description",
+  "variantProperties": {
+    "State": ["Default", "Hover"],
+    "Size":  ["Sm", "Md", "Lg"]
+  },
+  "variants": [
+    {
+      "properties": { "State": "Default", "Size": "Sm" },
+      "node": { "type": "FRAME", "children": [] }
+    }
+  ]
+}</pre
+            >
+          </div>
+        </div>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>string</td>
+                <td class="req-yes">Yes</td>
+                <td>The name of the ComponentSet in Figma.</td>
+              </tr>
+              <tr>
+                <td>type</td>
+                <td>"COMPONENT_SET"</td>
+                <td class="req-yes">Yes</td>
+                <td>
+                  Must be the literal string <code>"COMPONENT_SET"</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>description</td>
+                <td>string</td>
+                <td class="req-no">No</td>
+                <td>Optional description attached to the ComponentSet.</td>
+              </tr>
+              <tr>
+                <td>variantProperties</td>
+                <td>object</td>
+                <td class="req-yes">Yes</td>
+                <td>Declares the variant axes and their allowed values.</td>
+              </tr>
+              <tr>
+                <td>variants</td>
+                <td>array</td>
+                <td class="req-yes">Yes</td>
+                <td>One entry per variant combination.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =============================================
+           Node Types
+      ============================================= -->
+        <h2 id="node-types">Node Types</h2>
+
+        <p>
+          Every <code>node</code> must have a <code>type</code> field. Nodes can
+          be nested via <code>children</code> (on FRAME, and via wrapper frames
+          for other types).
+        </p>
+
+        <h3 id="node-frame">FRAME</h3>
+
+        <p>
+          The most common node type. Supports auto layout, padding, corner
+          radius, and all base style fields.
+        </p>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>layoutMode</td>
+                <td>"HORIZONTAL" | "VERTICAL" | "NONE"</td>
+                <td class="req-no">No</td>
+                <td>Enables auto layout. Defaults to NONE.</td>
+              </tr>
+              <tr>
+                <td>primaryAxisAlignItems</td>
+                <td>"MIN" | "CENTER" | "MAX" | "SPACE_BETWEEN"</td>
+                <td class="req-no">No</td>
+                <td>Main axis alignment (requires layoutMode).</td>
+              </tr>
+              <tr>
+                <td>counterAxisAlignItems</td>
+                <td>"MIN" | "CENTER" | "MAX"</td>
+                <td class="req-no">No</td>
+                <td>Cross axis alignment (requires layoutMode).</td>
+              </tr>
+              <tr>
+                <td>layoutSizingHorizontal</td>
+                <td>"FIXED" | "HUG" | "FILL"</td>
+                <td class="req-no">No</td>
+                <td>Horizontal sizing behaviour. Requires layoutMode.</td>
+              </tr>
+              <tr>
+                <td>layoutSizingVertical</td>
+                <td>"FIXED" | "HUG" | "FILL"</td>
+                <td class="req-no">No</td>
+                <td>Vertical sizing behaviour. Requires layoutMode.</td>
+              </tr>
+              <tr>
+                <td>itemSpacing</td>
+                <td>number</td>
+                <td class="req-no">*</td>
+                <td>Gap between children. Required when layoutMode is set.</td>
+              </tr>
+              <tr>
+                <td>padding</td>
+                <td>PaddingJSON</td>
+                <td class="req-no">*</td>
+                <td>Inner padding. Required when layoutMode is set.</td>
+              </tr>
+              <tr>
+                <td>cornerRadius</td>
+                <td>number</td>
+                <td class="req-no">No</td>
+                <td>Uniform corner radius.</td>
+              </tr>
+              <tr>
+                <td>cornerRadiusIndividual</td>
+                <td>CornerRadiusIndividual</td>
+                <td class="req-no">No</td>
+                <td>
+                  Per-corner radii (topLeft, topRight, bottomRight, bottomLeft).
+                </td>
+              </tr>
+              <tr>
+                <td>clipsContent</td>
+                <td>boolean</td>
+                <td class="req-no">No</td>
+                <td>Whether children are clipped to the frame bounds.</td>
+              </tr>
+              <tr>
+                <td>children</td>
+                <td>NodeJSON[]</td>
+                <td class="req-no">No</td>
+                <td>Nested child nodes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="node-text">TEXT</h3>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>characters</td>
+                <td>string</td>
+                <td class="req-yes">Yes</td>
+                <td>The text content to display.</td>
+              </tr>
+              <tr>
+                <td>fontSize</td>
+                <td>number</td>
+                <td class="req-no">No</td>
+                <td>Font size in pixels.</td>
+              </tr>
+              <tr>
+                <td>fontWeight</td>
+                <td>100–900</td>
+                <td class="req-no">No</td>
+                <td>Numeric font weight (must be a multiple of 100).</td>
+              </tr>
+              <tr>
+                <td>fontFamily</td>
+                <td>string</td>
+                <td class="req-no">No</td>
+                <td>Font family name. Falls back to Inter if unavailable.</td>
+              </tr>
+              <tr>
+                <td>fontStyle</td>
+                <td>"Regular" | "Medium" | "Bold" | "Italic"</td>
+                <td class="req-no">No</td>
+                <td>Font style name.</td>
+              </tr>
+              <tr>
+                <td>textAlign</td>
+                <td>"LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED"</td>
+                <td class="req-no">No</td>
+                <td>Horizontal text alignment.</td>
+              </tr>
+              <tr>
+                <td>textDecoration</td>
+                <td>"NONE" | "UNDERLINE" | "STRIKETHROUGH"</td>
+                <td class="req-no">No</td>
+                <td>Text decoration.</td>
+              </tr>
+              <tr>
+                <td>letterSpacing</td>
+                <td>number</td>
+                <td class="req-no">No</td>
+                <td>Letter spacing in pixels.</td>
+              </tr>
+              <tr>
+                <td>lineHeight</td>
+                <td>LineHeightJSON</td>
+                <td class="req-no">No</td>
+                <td>See Line Height below.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="node-rectangle">RECTANGLE</h3>
+        <p>
+          Supports all base style fields plus <code>cornerRadius</code> and
+          <code>cornerRadiusIndividual</code>. Does not support auto layout.
+          Children are placed in a transparent wrapper frame.
+        </p>
+
+        <h3 id="node-ellipse">ELLIPSE</h3>
+        <p>
+          Supports all base style fields. No corner radius. Children are placed
+          in a transparent wrapper frame.
+        </p>
+
+        <h3 id="base-fields">Common fields (all node types)</h3>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>Layer name in Figma.</td>
+              </tr>
+              <tr>
+                <td>width</td>
+                <td>number | "HUG" | "FILL"</td>
+                <td>"HUG"/"FILL" only valid on FRAME with layoutMode set.</td>
+              </tr>
+              <tr>
+                <td>height</td>
+                <td>number | "HUG" | "FILL"</td>
+                <td>Same constraint as width.</td>
+              </tr>
+              <tr>
+                <td>opacity</td>
+                <td>number (0–1)</td>
+                <td>Layer opacity.</td>
+              </tr>
+              <tr>
+                <td>blendMode</td>
+                <td>"NORMAL" | "MULTIPLY" | "SCREEN" | "OVERLAY"</td>
+                <td>Layer blend mode.</td>
+              </tr>
+              <tr>
+                <td>fills</td>
+                <td>PaintInput[]</td>
+                <td>Fill paints. See Fills and Paints.</td>
+              </tr>
+              <tr>
+                <td>strokes</td>
+                <td>PaintInput[]</td>
+                <td>Stroke paints.</td>
+              </tr>
+              <tr>
+                <td>strokeWeight</td>
+                <td>number</td>
+                <td>Stroke thickness in pixels.</td>
+              </tr>
+              <tr>
+                <td>strokePosition</td>
+                <td>"INSIDE" | "OUTSIDE" | "CENTER"</td>
+                <td>Stroke alignment relative to the shape.</td>
+              </tr>
+              <tr>
+                <td>strokeDashes</td>
+                <td>number[]</td>
+                <td>Dash pattern for the stroke.</td>
+              </tr>
+              <tr>
+                <td>effects</td>
+                <td>EffectJSON[]</td>
+                <td>Layer effects. See Effects.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =============================================
+           Variant Properties
+      ============================================= -->
+        <h2 id="variant-properties">Variant Properties</h2>
+
+        <p>
+          <code>variantProperties</code> declares the axes of variation. Each
+          key is a property name; the value is the array of allowed string
+          values for that property.
+        </p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span>
+            <button
+              class="copy-btn"
+              data-copy-target="cb-variants"
+              aria-label="Copy code"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path
+                  d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                />
+              </svg>
+              Copy
+            </button>
+          </div>
+          <div class="code-block__body">
+            <pre id="cb-variants">
+"variantProperties": {
+  "State": ["Default", "Hover", "Pressed", "Disabled"],
+  "Size":  ["Sm", "Md", "Lg"]
+}
+
+// Each variant entry must supply ALL property keys:
+{
+  "properties": { "State": "Default", "Size": "Sm" },
+  "node": { ... }
+}</pre
+            >
+          </div>
+        </div>
+
+        <p><strong>Validation rules:</strong></p>
+        <ul>
+          <li>
+            Every variant must include all keys defined in
+            <code>variantProperties</code>.
+          </li>
+          <li>No extra keys are allowed in variant <code>properties</code>.</li>
+          <li>
+            Each value must be one of the declared allowed values for that key.
+          </li>
+          <li>
+            No two variants may share the same combination of property values.
+          </li>
+        </ul>
+
+        <!-- =============================================
+           Fills and Paints
+      ============================================= -->
+        <h2 id="fills-paints">Fills and Paints</h2>
+
+        <p>
+          Both <code>fills</code> and <code>strokes</code> accept an array of
+          paint objects. Each item can be a hex string shorthand, a solid paint,
+          a linear gradient, or a radial gradient.
+        </p>
+
+        <h3 id="paint-hex">Hex shorthand</h3>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span
+            ><button
+              class="copy-btn"
+              data-copy-target="cb-hex"
+              aria-label="Copy code"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path
+                  d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                /></svg
+              >Copy
+            </button>
+          </div>
+          <div class="code-block__body">
+            <pre id="cb-hex">
+"fills": ["#D97757"]
+"fills": ["#FFF"]          // 3-digit shorthand is expanded</pre
+            >
+          </div>
+        </div>
+
+        <h3 id="paint-solid">Solid paint</h3>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span
+            ><button
+              class="copy-btn"
+              data-copy-target="cb-solid"
+              aria-label="Copy code"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path
+                  d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                /></svg
+              >Copy
+            </button>
+          </div>
+          <div class="code-block__body">
+            <pre id="cb-solid">
+{ "type": "SOLID", "r": 0.49, "g": 0.35, "b": 0.97, "a": 1 }
+// r, g, b, a must each be 0–1 (not 0–255)</pre
+            >
+          </div>
+        </div>
+
+        <h3 id="paint-gradient">Gradients</h3>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span
+            ><button
+              class="copy-btn"
+              data-copy-target="cb-gradient"
+              aria-label="Copy code"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path
+                  d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                /></svg
+              >Copy
+            </button>
+          </div>
+          <div class="code-block__body">
+            <pre id="cb-gradient">
+// Linear gradient
+{
+  "type": "LINEAR_GRADIENT",
+  "angle": 135,
+  "stops": [
+    { "r": 0.49, "g": 0.35, "b": 0.97, "position": 0 },
+    { "r": 0.29, "g": 0.18, "b": 0.80, "position": 1 }
+  ]
+}
+
+// Radial gradient
+{
+  "type": "RADIAL_GRADIENT",
+  "stops": [
+    { "r": 1, "g": 1, "b": 1, "a": 0.2, "position": 0 },
+    { "r": 1, "g": 1, "b": 1, "a": 0,   "position": 1 }
+  ]
+}</pre
+            >
+          </div>
+        </div>
+
+        <!-- =============================================
+           Effects
+      ============================================= -->
+        <h2 id="effects">Effects</h2>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>type</th>
+                <th>Required fields</th>
+                <th>Optional</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DROP_SHADOW</td>
+                <td>color, offset (x, y), blur</td>
+                <td>spread, visible</td>
+              </tr>
+              <tr>
+                <td>INNER_SHADOW</td>
+                <td>color, offset (x, y), blur</td>
+                <td>spread, visible</td>
+              </tr>
+              <tr>
+                <td>LAYER_BLUR</td>
+                <td>radius</td>
+                <td>visible</td>
+              </tr>
+              <tr>
+                <td>BACKGROUND_BLUR</td>
+                <td>radius</td>
+                <td>visible</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span
+            ><button
+              class="copy-btn"
+              data-copy-target="cb-effects"
+              aria-label="Copy code"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path
+                  d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                /></svg
+              >Copy
+            </button>
+          </div>
+          <div class="code-block__body">
+            <pre id="cb-effects">
+"effects": [
+  {
+    "type": "DROP_SHADOW",
+    "color": { "r": 0, "g": 0, "b": 0, "a": 0.3 },
+    "offset": { "x": 0, "y": 4 },
+    "blur": 12,
+    "spread": 0,
+    "visible": true
+  },
+  {
+    "type": "LAYER_BLUR",
+    "radius": 8
+  }
+]</pre
+            >
+          </div>
+        </div>
+
+        <!-- =============================================
+           Layout and Sizing
+      ============================================= -->
+        <h2 id="layout-sizing">Layout and Sizing</h2>
+
+        <p>
+          Auto layout is enabled on a FRAME node by setting
+          <code>layoutMode</code> to <code>"HORIZONTAL"</code> or
+          <code>"VERTICAL"</code>. When auto layout is active,
+          <code>itemSpacing</code> and <code>padding</code> are required.
+        </p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span
+            ><button
+              class="copy-btn"
+              data-copy-target="cb-layout"
+              aria-label="Copy code"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path
+                  d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                /></svg
+              >Copy
+            </button>
+          </div>
+          <div class="code-block__body">
+            <pre id="cb-layout">
+{
+  "type": "FRAME",
+  "layoutMode": "HORIZONTAL",
+  "primaryAxisAlignItems": "CENTER",
+  "counterAxisAlignItems": "CENTER",
+  "layoutSizingHorizontal": "HUG",
+  "layoutSizingVertical": "HUG",
+  "itemSpacing": 8,
+  "padding": { "top": 12, "right": 16, "bottom": 12, "left": 16 },
+  "children": [...]
+}</pre
+            >
+          </div>
+        </div>
+
+        <div class="docs-callout">
+          <span class="docs-callout__icon">⚠️</span>
+          <span
+            ><code>"HUG"</code> and <code>"FILL"</code> values for
+            <code>width</code> or <code>height</code> are only valid on FRAME
+            nodes with <code>layoutMode</code> set to
+            <code>"HORIZONTAL"</code> or <code>"VERTICAL"</code>.</span
+          >
+        </div>
+
+        <!-- =============================================
+           Typography
+      ============================================= -->
+        <h2 id="typography">Typography</h2>
+
+        <p>
+          Font loading follows this priority: <code>fontStyle</code> →
+          weight-derived style → <code>"Regular"</code>. If the requested family
+          is not available in Figma, it falls back to
+          <strong>Inter Regular</strong>.
+        </p>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>lineHeight.unit</td>
+                <td>"PIXELS" | "PERCENT" | "AUTO"</td>
+                <td>When unit is "AUTO", no value field is needed.</td>
+              </tr>
+              <tr>
+                <td>lineHeight.value</td>
+                <td>number</td>
+                <td>Required when unit is "PIXELS" or "PERCENT".</td>
+              </tr>
+              <tr>
+                <td>letterSpacing</td>
+                <td>number</td>
+                <td>Always interpreted as pixels.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =============================================
+           Validation Rules
+      ============================================= -->
+        <h2 id="validation">Validation Rules</h2>
+
+        <p>
+          The schema is validated before any Figma nodes are created. All errors
+          are reported together with dot-notation paths so you know exactly
+          which field to fix.
+        </p>
+
+        <div class="docs-table-wrap">
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Error message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Root must be an object</td>
+                <td>Root JSON must be an object</td>
+              </tr>
+              <tr>
+                <td>type must be COMPONENT_SET</td>
+                <td>type must be "COMPONENT_SET"</td>
+              </tr>
+              <tr>
+                <td>name required</td>
+                <td>name is required and must be a non-empty string</td>
+              </tr>
+              <tr>
+                <td>variantProperties required</td>
+                <td>variantProperties is required and must be an object</td>
+              </tr>
+              <tr>
+                <td>At least one property</td>
+                <td>variantProperties must declare at least one property</td>
+              </tr>
+              <tr>
+                <td>No duplicate variant combos</td>
+                <td>
+                  variants[N].properties duplicates another variant combination
+                </td>
+              </tr>
+              <tr>
+                <td>All variant keys present</td>
+                <td>variants[N].properties is missing keys: …</td>
+              </tr>
+              <tr>
+                <td>No extra variant keys</td>
+                <td>variants[N].properties has unexpected keys: …</td>
+              </tr>
+              <tr>
+                <td>Invalid fill hex</td>
+                <td>fills[N] has invalid hex fill "…"</td>
+              </tr>
+              <tr>
+                <td>HUG/FILL on non-layout frame</td>
+                <td>
+                  width/height "HUG" or "FILL" require layoutMode to be
+                  HORIZONTAL or VERTICAL
+                </td>
+              </tr>
+              <tr>
+                <td>itemSpacing missing</td>
+                <td>
+                  itemSpacing must be a number when layoutMode is HORIZONTAL or
+                  VERTICAL
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- =============================================
+           Examples
+      ============================================= -->
+        <h2 id="examples">Examples</h2>
+
+        <details open>
+          <summary
+            style="
+              cursor: pointer;
+              font-size: var(--text-base);
+              font-weight: var(--weight-semibold);
+              padding: var(--space-2) 0;
+              color: var(--color-text-primary);
+            "
+          >
+            Button (State × Size)
+          </summary>
+          <div class="code-block" style="margin-top: var(--space-3)">
+            <div class="code-block__header">
+              <span class="code-block__lang">JSON</span
+              ><button
+                class="copy-btn"
+                data-copy-target="ex-button"
+                aria-label="Copy code"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  aria-hidden="true"
+                >
+                  <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                  <path
+                    d="M11 5V3.5a1.5 1.5 0 00-1.5-1.5h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"
+                  /></svg
+                >Copy
+              </button>
+            </div>
+            <div class="code-block__body">
+              <pre id="ex-button">
+{
+  "name": "Button",
+  "type": "COMPONENT_SET",
+  "variantProperties": {
+    "State": ["Default", "Hover"],
+    "Size": ["Sm", "Md"]
+  },
+  "variants": [
+    {
+      "properties": { "State": "Default", "Size": "Sm" },
+      "node": {
+        "type": "FRAME",
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "padding": { "top": 8, "right": 12, "bottom": 8, "left": 12 },
+        "itemSpacing": 8,
+        "cornerRadius": 10,
+        "fills": ["#D97757"],
+        "children": [
+          {
+            "type": "TEXT",
+            "characters": "Continue",
+            "fontSize": 12,
+            "fills": ["#FFFFFF"]
+          }
+        ]
+      }
+    }
+  ]
+}</pre
+              >
+            </div>
+          </div>
+        </details>
+
+        <!-- =============================================
+           Contributing
+      ============================================= -->
+        <h2 id="contributing">Contributing</h2>
+
+        <p>
+          AI2Design is open source and welcomes contributions. Full contribution
+          guidelines are in
+          <a
+            href="https://github.com/thesrijak/AI2Design/blob/master/CONTRIBUTING.md"
+            target="_blank"
+            rel="noopener"
+            >CONTRIBUTING.md</a
+          >.
+        </p>
+
+        <h3 id="setup">Local setup</h3>
+        <ol>
+          <li>
+            Clone the repository and install dependencies:
+            <code>npm install</code>
+          </li>
+          <li>Build the plugin: <code>npm run build</code></li>
+          <li>
+            In Figma desktop, go to Plugins → Development → Import plugin from
+            manifest and select <code>manifest.json</code>.
+          </li>
+          <li>
+            For live rebuilds during development: <code>npm run watch</code>
+          </li>
+        </ol>
+
+        <h3 id="contributing-website">Contributing to the website</h3>
+        <p>
+          The website lives in the <code>website/</code> directory and is plain
+          HTML, CSS, and ES modules — no build step required. Open
+          <code>website/index.html</code> in a browser to start.
+        </p>
+        <ul>
+          <li>
+            <strong>New page</strong>: Copy <code>docs.html</code> →
+            <code>new-page.html</code>. Create corresponding CSS and JS files.
+          </li>
+          <li>
+            <strong>New feature card</strong>: Add a
+            <code>&lt;div class="card"&gt;</code> in the features grid in
+            <code>index.html</code>.
+          </li>
+          <li>
+            <strong>New docs section</strong>: Add a
+            <code>&lt;section&gt;</code> with a unique <code>id</code> in
+            <code>docs.html</code>. The sidebar ToC is auto-generated from
+            heading IDs.
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <a
+              href="index.html"
+              class="footer__brand-logo"
+              aria-label="AI2Design home"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 28 28"
+                fill="none"
+                aria-hidden="true"
+              >
+                <rect
+                  width="28"
+                  height="28"
+                  rx="7"
+                  fill="#D97757"
+                  fill-opacity="0.12"
+                />
+                <path
+                  d="M9 20L14 8L19 20M11.5 15.5H16.5"
+                  stroke="#D97757"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              AI2Design
+            </a>
+            <p class="footer__brand-desc">
+              Turn structured JSON into fully editable Figma component sets.
+            </p>
+          </div>
+          <div class="footer__col">
+            <p class="footer__col-heading">Product</p>
+            <ul class="footer__col-links">
+              <li>
+                <a href="index.html#install" class="footer__col-link"
+                  >Figma Plugin</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/thesrijak/AI2Design"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__col-link"
+                  >GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <p class="footer__col-heading">Docs</p>
+            <ul class="footer__col-links">
+              <li>
+                <a href="#getting-started" class="footer__col-link"
+                  >Getting Started</a
+                >
+              </li>
+              <li>
+                <a href="#schema-overview" class="footer__col-link"
+                  >Schema Overview</a
+                >
+              </li>
+              <li>
+                <a href="#node-types" class="footer__col-link">Node Types</a>
+              </li>
+              <li>
+                <a href="#contributing" class="footer__col-link"
+                  >Contributing</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <p class="footer__col-heading">Legal</p>
+            <ul class="footer__col-links">
+              <li>
+                <a
+                  href="https://github.com/thesrijak/AI2Design/blob/master/LICENSE.md"
+                  target="_blank"
+                  rel="noopener"
+                  class="footer__col-link"
+                  >MIT License</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__copy">
+            MIT Licensed. Made by the AI2Design contributors.
+          </p>
+          <div class="footer__bottom-links">
+            <a
+              href="https://github.com/thesrijak/AI2Design"
+              target="_blank"
+              rel="noopener"
+              class="footer__bottom-link"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="js/docs.js"></script>
+  </body>
+</html>

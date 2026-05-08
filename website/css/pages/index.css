@@ -1,0 +1,25 @@
+/* =========================================================
+   Page overrides — index.html
+   Anthropic-style subtle dot grid on warm cream background.
+   ========================================================= */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    hsl(45 12% 60% / 0.35) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav,
+main,
+footer {
+  position: relative;
+  z-index: var(--z-base);
+}
