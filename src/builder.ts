@@ -648,6 +648,25 @@ export async function buildComponentSet(json: ComponentSetJSON) {
 
   positionVariantsAsGrid(variantNodes, 40);
 
+  // Add equal padding on all sides. Compute actual content bounds from the
+  // variant nodes (not from componentSet.height, which Figma may inflate),
+  // then resize the frame precisely and shift every variant inward.
+  const CS_PADDING = 40;
+  let contentMaxX = 0;
+  let contentMaxY = 0;
+  variantNodes.forEach(function (node) {
+    contentMaxX = Math.max(contentMaxX, node.x + node.width);
+    contentMaxY = Math.max(contentMaxY, node.y + node.height);
+  });
+  componentSet.resize(
+    contentMaxX + CS_PADDING * 2,
+    contentMaxY + CS_PADDING * 2,
+  );
+  variantNodes.forEach(function (node) {
+    node.x += CS_PADDING;
+    node.y += CS_PADDING;
+  });
+
   componentSet.x = figma.viewport.center.x - componentSet.width / 2;
   componentSet.y = figma.viewport.center.y - componentSet.height / 2;
 
