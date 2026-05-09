@@ -13,12 +13,16 @@ import { ExamplePicker } from "./components/ExamplePicker";
 import { JsonEditor } from "./components/JsonEditor";
 import { StatusBar } from "./components/StatusBar";
 import { ApplyButton } from "./components/ApplyButton";
+import { TabBar } from "./components/builder/TabBar";
+import { BuilderTab } from "./components/builder/BuilderTab";
 
 const EXAMPLES = Object.keys(exampleTemplates);
 
+type Tab = "builder" | "json";
+
 /**
  * Root plugin component.
- * Owns global state (theme, status, submitting) and wires all sub-components.
+ * Owns global state (theme, status, submitting, currentTab) and wires all sub-components.
  */
 export function App() {
   const theme = useTheme();
@@ -26,6 +30,7 @@ export function App() {
 
   const [status, setStatus] = useState<Status>({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentTab, setCurrentTab] = useState<Tab>("builder");
 
   const editor = useJsonEditor(setStatus);
 
@@ -94,12 +99,31 @@ export function App() {
 
       <Header colors={c} />
 
-      {/* Scrollable body */}
+      <TabBar currentTab={currentTab} onTabChange={setCurrentTab} colors={c} />
+
+      {/* Builder tab — always mounted, hidden when inactive */}
       <div
         style={{
           flex: 1,
           minHeight: 0,
-          display: "flex",
+          display: currentTab === "builder" ? "flex" : "none",
+          flexDirection: "column",
+        }}
+      >
+        <BuilderTab
+          componentSet={editor.componentSet}
+          jsonParseError={editor.jsonParseError}
+          onBuilderChange={editor.handleBuilderChange}
+          colors={c}
+        />
+      </div>
+
+      {/* JSON tab — always mounted, hidden when inactive */}
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          display: currentTab === "json" ? "flex" : "none",
           flexDirection: "column",
           padding: "16px",
           gap: "14px",
